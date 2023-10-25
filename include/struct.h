@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.h                                      :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 13:48:42 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/25 17:24:27 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/10/25 16:36:03 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/10/25 18:33:03 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_INPUT_H
-# define PARSE_INPUT_H
-# include "struct.h"
-# include "philo.h"
+#ifndef STRUCT_H
+# define STRUCT_H
+# include <stdbool.h>
 
-int		parse_input(int ac, char **av, t_input *s_input);
-long	atol(const char *s);
-#endif // PARSE_INPUT_H
+typedef struct s_philo t_philo;
+typedef struct s_input
+{
+	int num_philos;
+	int time_to_die;
+	int time_to_eat;
+	int time_to_sleep;
+	int	req_meals;
+	bool	req_meals_status;
+}	t_input;
+
+struct s_philo
+{
+	/*store some data*/
+
+	/*pointer to input struct*/
+	t_input	*input;
+};
+
+#endif

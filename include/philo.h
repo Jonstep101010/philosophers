@@ -6,16 +6,19 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:25:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/25 14:59:13 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:50:00 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-# include "io/parse_input.h"
 # include <stddef.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
+# include "io/parse_input.h"
+# include "struct.h"
 
 /**
  * @brief make sure testing framework is working

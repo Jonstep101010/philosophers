@@ -6,25 +6,45 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/25 15:27:22 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:26:03 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_input.h"
 
-int	parse_input(int ac, char **av)
+int	check_value(t_input *s_input)
 {
-	(void)av;
-	if (ac == 5)
-	{
-		return (0);
-	}
-
-	// else if (ac == 6)
-	// {
-	// 	/*handle req_meals*/
-	// }
-	else
+	// handle req_meals < 0?
+	// if (s_input->req_meals < 1)
+	// 	return ()
+	if (s_input->num_philos < 1)
 		return (1);
-		/*handle incorrect input*/
+	if (s_input->time_to_die < 10)
+		return (1);
+	if (s_input->time_to_eat < 10)
+		return (1);
+	if (s_input->time_to_sleep < 10)
+		return (1);
+	return (0);
+}
+
+/**
+ * @brief parser with rudimentary checks
+ * @return exit status
+ */
+int	parse_input(int ac, char **av, t_input *s_input)
+{
+	if (ac > 6 || ac < 5)
+		return (1);
+	s_input->num_philos = atol(av[1]);
+	s_input->time_to_die = atol(av[2]);
+	s_input->time_to_eat = atol(av[3]);
+	s_input->time_to_sleep = atol(av[4]);
+	s_input->req_meals_status = false;
+	if (ac == 6)
+	{
+		s_input->req_meals_status = true;
+		s_input->req_meals = atol(av[5]);
+	}
+	return (check_value(s_input));
 }

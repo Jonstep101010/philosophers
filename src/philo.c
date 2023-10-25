@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:24:34 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/25 15:08:19 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:37:52 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,19 @@ char	*should_return_executed_philo(){
 #ifndef TEST
 int main(int ac, char **av)
 {
+	// t_philo	*s_philo;
+	t_input	s_input;
+
+	// memset(&s_philo, 0, sizeof(s_philo));
+	// s_philo.input->philo = &s_philo;
+	memset(&s_input, 0, sizeof(t_input));
 	// (void)ac;
 	// (void)av;
 	// printf("%s\n", should_return_executed_philo());
-	if (ac < 5 || parse_input(ac, av) == EXIT_FAILURE)
+	if (parse_input(ac, av, &s_input) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	// s_philo->input =
+	// printf("%d\n", s_input.num_philos);
 	return (0);
 }
 #endif // protect against duplicate main for testing

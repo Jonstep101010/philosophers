@@ -1,4 +1,4 @@
 {
     "ceedlingExplorer.projectPath": ".",
-    "cmake.configureOnOpen": false,
+    "editor.insertSpaces": false,
 }

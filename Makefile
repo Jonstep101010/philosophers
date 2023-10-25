@@ -15,7 +15,7 @@ BUILD_DIR	:= .build
 VPATH		:= src/ src/io
 
 SRC			:= $(NAME).c
-SRC_IO		:= parse_input.c
+SRC_IO		:= parse_input.c atol.c
 
 SRCS		:= $(SRC) $(SRC_IO)
 
@@ -79,7 +79,7 @@ update: fclean
 	git stash pop
 
 run: all
-	-./$(NAME)
+	./$(NAME)
 
 norme:
 	clear
