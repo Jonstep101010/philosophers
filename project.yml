@@ -13,7 +13,7 @@
   :use_backtrace_gdb_reporter: FALSE
 
   # tweak the way ceedling handles automatic tasks
-  :build_root: build
+  :build_root: .build_test
   :test_file_prefix: test_
   :default_tasks:
     - test:all
@@ -99,6 +99,7 @@
     - test/support
   :include:
     - include/*
+    - src/
   :libraries: []
 
 # You can even specify specific files to add or remove from your test
@@ -226,7 +227,7 @@
   :test_root: test/
   :naming: :snake #options: :bumpy, :camel, :caps, or :snake
   :includes:
-    :tst: [test/support]
+    :tst: [unity.h, philo.h]
   #   :src: []:module_generator:
   # :boilerplates: ""
 

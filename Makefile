@@ -3,7 +3,8 @@ NAME		  := philo
 
 # --------------------------------- includes --------------------------------- #
 
-INCS		= ./include
+INCS		= ./include \
+				./include/io
 
 BUILD_DIR	:= .build
 
@@ -11,11 +12,12 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/
+VPATH		:= src/ src/io
 
 SRC			:= $(NAME).c
+SRC_IO		:= parse_input.c
 
-SRCS		:= $(SRC)
+SRCS		:= $(SRC) $(SRC_IO)
 
 # ---------------------------------------------------------------------------- #
 #                             compilation arguments                            #
@@ -59,12 +61,10 @@ $(BUILD_DIR):
 
 clean:
 	$(info Cleaning...)
-	make -C $(dir $(LIB_FT)) clean
 	rm -rf .build
 	$(DONE_NL)
 
 fclean: clean
-	rm -fv $(LIB_FT)
 	rm -f $(NAME)
 
 re:
@@ -79,7 +79,7 @@ update: fclean
 	git stash pop
 
 run: all
-	./$(NAME)
+	-./$(NAME)
 
 norme:
 	clear
