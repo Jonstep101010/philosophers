@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   set_philos.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 18:25:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/27 15:59:29 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/10/27 15:49:45 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/10/27 16:02:32 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
-# include <stddef.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <pthread.h>
-# include "io/parse_input.h"
-# include "setup/set_philos.h"
-# include "utils/utils.h"
-# include "struct.h"
+#ifndef SET_PHILOS_H
+# define SET_PHILOS_H
 
-/**
- * @brief make sure testing framework is working
- */
-char	*should_return_executed_philo();
-#endif
+# include "struct.h"
+# include "philo.h"
+
+void	set_philos(t_philo *s_philo, t_input *s_input);
+
+#endif // SET_PHILOS_H

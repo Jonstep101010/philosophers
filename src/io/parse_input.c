@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/25 18:26:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:43:37 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	check_value(t_input *s_input)
 {
 	// handle req_meals < 0?
-	// if (s_input->req_meals < 1)
-	// 	return ()
+	if (s_input->req_meals < 1)
+		return (1);
 	if (s_input->num_philos < 1)
 		return (1);
 	if (s_input->time_to_die < 10)

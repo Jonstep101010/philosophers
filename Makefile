@@ -4,7 +4,9 @@ NAME		  := philo
 # --------------------------------- includes --------------------------------- #
 
 INCS		= ./include \
-				./include/io
+				./include/io \
+				./include/setup \
+				./include/utils
 
 BUILD_DIR	:= .build
 
@@ -12,12 +14,14 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/ src/io
+VPATH		:= src/ src/io src/setup src/utils
 
 SRC			:= $(NAME).c
 SRC_IO		:= parse_input.c atol.c
+SRC_SETUP	:= set_philos.c
+SRC_UTILS	:= ft_calloc.c
 
-SRCS		:= $(SRC) $(SRC_IO)
+SRCS		:= $(SRC) $(SRC_IO) $(SRC_SETUP) $(SRC_UTILS)
 
 # ---------------------------------------------------------------------------- #
 #                             compilation arguments                            #
@@ -30,7 +34,7 @@ CC			:= clang
 CFLAGS		?= -g3 -Wall -Wextra -Werror -DRELEASE=1 #-Wpedantic
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 # LDFLAGS		= $(addprefix -L, $(dir $(LIB_FT)))
-LDLIB		:= $(addprefix -l, $(LIB))
+# LDLIB		:= $(addprefix -l, "pthreads")
 
 MAKEFLAGS	+= --no-print-directory --silent
 
