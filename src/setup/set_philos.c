@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/27 17:31:58 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:35:48 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static	void	set_first_philo(t_philo *s_philo, t_input *s_input)
 	pthread_mutex_init(&first_mutex, NULL);
 	s_philo->id = 1;
 	s_philo->input = s_input;
+	s_philo->mutex = &first_mutex;
 }
 
 /**
@@ -30,7 +31,7 @@ static	void	set_first_philo(t_philo *s_philo, t_input *s_input)
  */
 static	t_philo	*create_philo(t_philo *prev, t_input *s_input, int id)
 {
-	t_philo	*new_philo;
+	t_philo			*new_philo;
 	pthread_mutex_t	new_mutex;
 
 	if (id > s_input->num_philos)
@@ -60,7 +61,7 @@ void	set_philos(t_philo *s_philo, t_input *s_input)
 	int		id;
 
 	set_first_philo(s_philo, s_input);
-	id = 1;
+	id = 2;
 	prev = NULL;
 	cur = s_philo;
 	while (id <= s_input->num_philos)
@@ -68,11 +69,9 @@ void	set_philos(t_philo *s_philo, t_input *s_input)
 		cur->next = create_philo(cur, s_input, id);
 		if (!cur->next)
 			break;
-		cur->next->left = cur->mutex;
+		// cur->next->left = cur->mutex;
 		// prev = cur;
 		cur = cur->next;
-		// if (prev)
-		// 	prev->right = cur->mutex;
 		id++;
 	}
 	cur->next = s_philo;

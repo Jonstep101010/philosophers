@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:24:34 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/27 16:01:53 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:42:56 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ pthread_detach, pthread_join, pthread_mutex_init,
 pthread_mutex_destroy, pthread_mutex_lock,
 pthread_mutex_unlock
 */
+
+void	deconstruct(t_philo *s_philo)
+{
+	t_philo	*tmp;
+
+	tmp = s_philo;
+	while (tmp)
+	{
+		tmp = s_philo->next;
+		if (tmp->mutex)
+			pthread_mutex_destroy(tmp->mutex);
+		free(s_philo);
+		s_philo = NULL;
+		s_philo = tmp;
+	}
+}
 
 char	*should_return_executed_philo(){
 	return ("executed philo");
@@ -44,7 +60,8 @@ int main(int ac, char **av)
 	set_philos(s_philo, &s_input);
 
 	// s_philo->input =
-	// printf("%d\n", s_input.num_philos);
+	printf("%d\n", s_philo->next->next->id);
+	deconstruct(s_philo);
 	return (0);
 }
 #endif // protect against duplicate main for testing
