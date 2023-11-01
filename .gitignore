@@ -61,3 +61,4 @@ Unity/
 philo
 chat_*.md
 .build_test/
+build/

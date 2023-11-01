@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:24:34 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/27 20:42:56 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:35:25 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ int main(int ac, char **av)
 		return (EXIT_FAILURE);
 	s_philo = (t_philo *) ft_calloc(1, sizeof(t_philo));
 	set_philos(s_philo, &s_input);
+	printf("%d", s_philo->id);
 
 	// s_philo->input =
-	printf("%d\n", s_philo->next->next->id);
+	printf("%d\n", s_philo->next->id);
 	deconstruct(s_philo);
+	printf("%d\n", s_philo->next->next->id);
+	
 	return (0);
 }
 #endif // protect against duplicate main for testing

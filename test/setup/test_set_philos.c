@@ -6,6 +6,8 @@
 #include "philo.h"
 #include "struct.h"
 #include "set_philos.h"
+#include "utils/utils.h"
+#include "utils/ft_calloc.c"
 
 void setUp(void)
 {

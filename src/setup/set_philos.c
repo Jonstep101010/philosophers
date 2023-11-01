@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/27 20:35:48 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:17:21 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ static	t_philo	*create_philo(t_philo *prev, t_input *s_input, int id)
 void	set_philos(t_philo *s_philo, t_input *s_input)
 {
  	t_philo	*cur;
-	t_philo	*prev;
+	// t_philo	*prev;
 	int		id;
 
 	set_first_philo(s_philo, s_input);
 	id = 2;
-	prev = NULL;
+	// prev = NULL;
 	cur = s_philo;
 	while (id <= s_input->num_philos)
 	{

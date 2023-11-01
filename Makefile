@@ -31,12 +31,13 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
-CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread -fsanitize=thread #-Wpedantic
+CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread #-Wpedantic
+# DBGFLAGS	?=
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 # LDFLAGS		= $(addprefix -L, $(dir $(LIB_FT)))
 # LDLIB		:= $(addprefix -l, "pthreads")
 
-MAKEFLAGS	+= --no-print-directory --silent
+MAKEFLAGS	+= --no-print-directory #--silent
 
 DONE		= printf "\033[0;32m\xE2\x9C\x93\033[0m "
 DONE_NL		= printf "\033[0;32m\xE2\x9C\x93\n\033[0m"
@@ -77,17 +78,26 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 # git submodule update --init --recursive
+INPUT	= 4 400 300 200
+
 update: fclean
 	git stash
 	git pull
 	git stash pop
 
 run: all
-	./$(NAME)
+	./$(NAME) 4 400 300 200 
 
 norme:
 	clear
 	-norminette src/ | grep Error
+
+memcheck:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(INPUT)
+
+debug: all
+	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes \
+	./$(NAME) 4 400 300 200
 
 # test:
 # 	cd ./../tests-pipex && sh ./test.sh

@@ -1,4 +1,6 @@
 {
     "ceedlingExplorer.projectPath": ".",
-    "editor.insertSpaces": false,
+	"ceedlingExplorer.shellPath": "zsh",
+	"editor.insertSpaces": false,
+	"testExplorer.useNativeTesting": true,
 }
