@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:24:34 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/31 17:35:25 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/05 14:58:46 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	deconstruct(t_philo *s_philo)
 	while (tmp)
 	{
 		tmp = s_philo->next;
-		if (tmp->mutex)
-			pthread_mutex_destroy(tmp->mutex);
+		if (tmp->right)
+			pthread_mutex_destroy(tmp->right);
 		free(s_philo);
 		s_philo = NULL;
 		s_philo = tmp;

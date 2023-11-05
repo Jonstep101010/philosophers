@@ -6,11 +6,16 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/28 15:17:21 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/05 14:35:59 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "set_philos.h"
+#ifndef TEST
+# include "nontest.h"
+#endif
+#ifdef TEST
+# include "set_philos.h"
+#endif
 
 //@follow-up see if segfault on first
 static	void	set_first_philo(t_philo *s_philo, t_input *s_input)
@@ -20,7 +25,7 @@ static	void	set_first_philo(t_philo *s_philo, t_input *s_input)
 	pthread_mutex_init(&first_mutex, NULL);
 	s_philo->id = 1;
 	s_philo->input = s_input;
-	s_philo->mutex = &first_mutex;
+	s_philo->right = &first_mutex;
 }
 
 /**
@@ -43,8 +48,8 @@ static	t_philo	*create_philo(t_philo *prev, t_input *s_input, int id)
 	new_philo->input = s_input;
 	pthread_mutex_init(&new_mutex, NULL);
 	prev->right = &new_mutex;
-	new_philo->left = prev->mutex;
-	new_philo->mutex = &new_mutex;
+	new_philo->left = prev->right;
+	new_philo->right = &new_mutex;
 	return (new_philo);
 }
 
@@ -75,7 +80,7 @@ void	set_philos(t_philo *s_philo, t_input *s_input)
 		id++;
 	}
 	cur->next = s_philo;
-	s_philo->left = cur->mutex;
-	s_philo->right = s_philo->next->mutex;
+	s_philo->left = cur->right;
+	s_philo->right = s_philo->next->left;
 }
 

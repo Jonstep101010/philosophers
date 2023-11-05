@@ -3,4 +3,5 @@
 	"ceedlingExplorer.shellPath": "zsh",
 	"editor.insertSpaces": false,
 	"testExplorer.useNativeTesting": true,
+	"C_Cpp.codeAnalysis.clangTidy.enabled": true,
 }
