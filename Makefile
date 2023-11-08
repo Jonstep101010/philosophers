@@ -92,8 +92,8 @@ norme:
 	clear
 	-norminette src/ | grep Error
 
-memcheck:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(INPUT)
+memcheck: all
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(INPUT)
 
 debug: all
 	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes \

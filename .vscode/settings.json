@@ -4,4 +4,7 @@
 	"editor.insertSpaces": false,
 	"testExplorer.useNativeTesting": true,
 	"C_Cpp.codeAnalysis.clangTidy.enabled": true,
+	"files.exclude": {
+		".*/": true,
+	}
 }

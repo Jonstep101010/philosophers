@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/07 07:51:36 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:08:30 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,70 +17,52 @@
 # include "set_philos.h"
 #endif
 
-//@follow-up see if segfault on first
-static	void	set_first_philo(t_philo *s_philo, t_input *s_input)
-{
-	pthread_mutex_t	first_mutex;
-
-	pthread_mutex_init(&first_mutex, NULL);
-	s_philo->id = 1;
-	s_philo->input = s_input;
-	s_philo->right = &first_mutex;
-}
-
 /**
- * @brief Create a the next philo object
+ * @brief Create a the next first object
  *
- * @param cur previous object
  * @return t_philo* cur->next
  */
-static	t_philo	*create_philo(t_philo *prev, t_input *s_input, int id)
+static	t_philo	*create_philo(t_input *s_input, int id)
 {
-	t_philo			*new_philo;
-	pthread_mutex_t	new_mutex;
+	t_philo			*new;
 
 	if (id > s_input->num_philos)
 		return (NULL);
-	new_philo = (t_philo *) ft_calloc(1, sizeof(t_philo));
-	if (!new_philo)
+	new = (t_philo *) ft_calloc(1, sizeof(t_philo));
+	if (!new)
 		return (NULL);
-	new_philo->id = id;
-	new_philo->input = s_input;
-	pthread_mutex_init(&new_mutex, NULL);
-	prev->right = &new_mutex;
-	new_philo->left = prev->right;
-	new_philo->right = &new_mutex;
-	return (new_philo);
+	new->id = id;
+	new->input = s_input;
+	pthread_mutex_init(&(new->right), NULL);
+	return (new);
 }
 
 /**
- * @brief Set the philos object
+ * @brief Set the firsts object
  *
- * @param s_philo first philo
  * @param s_input
  */
-void	set_philos(t_philo *s_philo, t_input *s_input)
+t_philo	*set_philos(t_input *s_input)
 {
  	t_philo	*cur;
-	// t_philo	*prev;
+	t_philo	*first;
 	int		id;
 
-	set_first_philo(s_philo, s_input);
-	id = 2;
-	// prev = NULL;
-	cur = s_philo;
-	while (id <= s_input->num_philos)
+	first = create_philo(s_input, 1);
+	if (!first)
+		return (NULL);
+	id = 1;
+	cur = first;
+	while (++id <= s_input->num_philos)
 	{
-		cur->next = create_philo(cur, s_input, id);
-		if (!cur->next)
+		cur->next = create_philo(s_input, id);
+		if (id == s_input->num_philos)
 			break;
-		// cur->next->left = cur->mutex;
-		// prev = cur;
+		cur->next->left = &(cur->right);
 		cur = cur->next;
-		id++;
 	}
-	cur->next = s_philo;
-	s_philo->left = cur->right;
-	s_philo->right = s_philo->next->left;
+	first->left = &(cur->next->right); // assign last fork to be left of first
+	cur->next->next = first; // assign next to last
+	return (first);
 }
 
