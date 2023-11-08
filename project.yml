@@ -6,7 +6,7 @@
 
   # optional features. If you don't need them, keep them turned off for performance
   :use_mocks: TRUE
-  :use_test_preprocessor: TRUE
+  :use_test_preprocessor: FALSE
   :use_preprocessor_directives: FALSE
   :use_deep_dependencies: FALSE
   :use_auxiliary_dependencies: TRUE
@@ -227,8 +227,8 @@
   :test_root: test/
   :naming: :snake #options: :bumpy, :camel, :caps, or :snake
   :includes:
-    :tst: [unity.h, philo.h, struct.h]
-  #   :src: []:module_generator:
+    :tst: [struct.h, stdlib.h]
+    # :src: []:module_generator:
   # :boilerplates: ""
 
 # :dependencies:

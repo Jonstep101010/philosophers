@@ -6,12 +6,12 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/05 14:35:59 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/07 07:51:36 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST
-# include "nontest.h"
+# include "philo.h"
 #endif
 #ifdef TEST
 # include "set_philos.h"

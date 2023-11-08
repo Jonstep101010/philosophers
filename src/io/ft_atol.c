@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atol.c                                             :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:22:00 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/25 17:26:21 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:53:14 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_input.h"
 #include <limits.h>
-
-static bool	isdigit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (true);
-	return (false);
-}
 
 static bool	isprefix(char c)
 {
@@ -27,7 +20,7 @@ static bool	isprefix(char c)
 	return (false);
 }
 
-long	atol(const char *s)
+long	ft_atol(const char *s)
 {
 	long	total;
 	int		notation;
@@ -46,7 +39,7 @@ long	atol(const char *s)
 			notation = -1;
 		i++;
 	}
-	while (isdigit(s[i]))
+	while (ft_isdigit(s[i]))
 	{
 		total = total * 10 + (s[i] - 48);
 		i++;

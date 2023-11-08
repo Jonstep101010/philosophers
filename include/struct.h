@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:36:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/05 13:31:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:09:57 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 typedef struct s_philo t_philo;
 typedef struct s_input
 {
+	time_t	start_time;
 	int num_philos;
 	int time_to_die;
 	int time_to_eat;
 	int time_to_sleep;
-	int	req_meals;
-	bool	req_meals_status;
+	int	meals_to_eat;
 }	t_input;
 
 
