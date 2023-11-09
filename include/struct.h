@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:36:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/08 18:05:25 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:05:44 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_input
 /*store individual philo*/
 struct s_philo
 {
+	pthread_t		thread_id;
 	int				id;
 	t_philo			*next;
 	t_input			*input;

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:42:19 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/08 18:07:09 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:48:54 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@
 # include <stdio.h>
 #endif
 
+/**
+ * @brief tell user how to supply correct input
+ * @return programs exit code
+ */
 int		wrong_input()
 {
-	printf("Some kind of Error message");
+	printf("Some kind of Error message\n");
 	return (EXIT_FAILURE);
 }
 

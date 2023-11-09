@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:45:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/09 16:31:27 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:16:02 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int main(int ac, char **av)
 	if (validate_and_init(&rules, ac, av) == EXIT_FAILURE)
 		return (wrong_input());
 	s_philo = set_philos(rules);
-	simulation(s_philo, rules);
-	deconstruct(s_philo, rules);
-	// printf("%d\n", s_philo->next->next->id);
+	// printf("%d\n", s_philo[1]->id);
+	simulation(*s_philo, rules);
+	deconstruct(*s_philo, rules);
+	// free(s_philo);
+	// s_philo = NULL;
 	return (0);
 }
 #endif // protect against duplicate main for testing
