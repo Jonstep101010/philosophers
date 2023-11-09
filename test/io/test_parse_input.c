@@ -1,9 +1,10 @@
-// #ifdef TEST
+#ifdef TEST
 
 #include "parse_input.h"
 #include "../../src/io/ft_atol.c"
 #include "../../src/utils/checks.c"
 #include "../../src/utils/ft_calloc.c"
+#include "../../src/utils/time.c"
 
 #include "unity.h"
 
@@ -51,4 +52,13 @@ void test_parse_input_parses_optional_input(){
 	free(s_input);
 }
 
-// #endif // TEST
+void test_parse_input_parses_correct_time(){
+	t_input	*s_input;
+	char	*av[] = {"philo", "2", "1000", "800", "200", "2", NULL};
+	time_t	cmp = time(NULL);
+	validate_and_init(&s_input, 6, av);
+	TEST_ASSERT_UINT64_WITHIN(2, cmp, s_input->start_time/1000);
+	free(s_input);
+}
+
+#endif // TEST

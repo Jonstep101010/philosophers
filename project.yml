@@ -227,7 +227,7 @@
   :test_root: test/
   :naming: :snake #options: :bumpy, :camel, :caps, or :snake
   :includes:
-    :tst: [struct.h, stdlib.h]
+    :tst: [struct.h]
     # :src: []:module_generator:
   # :boilerplates: ""
 

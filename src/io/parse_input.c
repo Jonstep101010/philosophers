@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/07 09:36:04 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:27:23 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_input	*init_input_rules(int ac, char **av)
 	t_input	*s_input;
 
 	s_input = (t_input *) ft_calloc(1, sizeof(t_input));
-	s_input->start_time = 0;// (@todo get_time_ms)
+	s_input->start_time = get_time_ms();// (@todo get_time_ms)
 	s_input->num_philos = ft_atol(av[1]);
 	s_input->time_to_die = ft_atol(av[2]);
 	s_input->time_to_eat = ft_atol(av[3]);

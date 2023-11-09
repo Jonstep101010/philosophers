@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/07 09:30:57 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:17:15 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@
 # include "utils/utils.h"
 # include "utils/cleanup.h"
 # include "utils/checks.h"
+# include "utils/time.h"
 
 #endif //PHILO_H (actual philo header that will be used in the project)
