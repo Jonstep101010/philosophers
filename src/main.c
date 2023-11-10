@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:45:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/10 09:23:19 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:16:02 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ pthread_mutex_unlock
 int main(int ac, char **av)
 {
 	t_philo	*s_philo;
-	t_table	*table;
+	t_input	*rules;
 
-	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
+	if (validate_and_init(&rules, ac, av) == EXIT_FAILURE)
 		return (wrong_input());
-	s_philo = set_philos(table);
-	if (simulation(s_philo, table) != TABLE_OK)
-		printf("Error in table thread handling\n");
-	deconstruct(s_philo, table);
+	s_philo = set_philos(rules);
+	// printf("%d\n", s_philo[1]->id);
+	simulation(*s_philo, rules);
+	deconstruct(*s_philo, rules);
 	// free(s_philo);
 	// s_philo = NULL;
 	return (0);

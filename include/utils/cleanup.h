@@ -2,6 +2,6 @@
 # define CLEANUP_H
 #include "struct.h"
 #include <stdlib.h>
-void	deconstruct(t_philo *s_philo, t_table *rules);
+void	deconstruct(t_philo *s_philo, t_input *rules);
 int		wrong_input();
 #endif // CLEANUP_H
