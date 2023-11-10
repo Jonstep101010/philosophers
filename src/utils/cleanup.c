@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:42:19 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/09 16:48:54 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/10 09:28:02 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	free_philo(t_philo *philo)
 	philo = NULL;
 }
 
-void	deconstruct(t_philo *philo, t_input *rules)
+void	deconstruct(t_philo *philo, t_table *rules)
 {
 	t_philo	*tmp;
 
@@ -45,6 +45,8 @@ void	deconstruct(t_philo *philo, t_input *rules)
 		free_philo(philo);
 		philo = tmp;
 	}
+	free(rules->philo_list);
+	rules->philo_list = NULL;
 	free(rules);
 	rules = NULL;
 }
