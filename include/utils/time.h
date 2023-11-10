@@ -5,4 +5,5 @@
 typedef	long time_t;
 # endif
 time_t	get_time_ms(void);
+void	p_sleep(time_t duration);
 #endif // TIME_H

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/08 18:08:30 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/10 09:10:38 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,50 +19,74 @@
 
 /**
  * @brief Create a the next first object
- *
+ * @attention expects everything other than table to be valid
  * @return t_philo* cur->next
  */
-static	t_philo	*create_philo(t_input *s_input, int id)
+t_philo	*create_philo(t_table *table, int id)
 {
 	t_philo			*new;
 
-	if (id > s_input->num_philos)
+	if (!table)
 		return (NULL);
 	new = (t_philo *) ft_calloc(1, sizeof(t_philo));
 	if (!new)
 		return (NULL);
 	new->id = id;
-	new->input = s_input;
+	new->input = table;
 	pthread_mutex_init(&(new->right), NULL);
 	return (new);
 }
 
 /**
+ * @brief
+ * @warning indexing starts at 0, index num_philos points to NULL
+ * @param table
+ * @param first
+ */
+void	setup_table(t_table *table, t_philo *cur)
+{
+	int		i;
+
+	if (!table)
+		return ;
+	i = -1;
+	table->philo_list = ft_calloc(table->num_philos + 1, sizeof(t_philo *));
+	while (++i < table->num_philos)
+	{
+		table->philo_list[i] = cur;
+		cur = cur->next;
+	}
+	table->philo_list[i] = NULL;
+}
+
+/**
  * @brief Set the firsts object
  *
- * @param s_input
+ * @param table
  */
-t_philo	*set_philos(t_input *s_input)
+t_philo	*set_philos(t_table *table)
 {
  	t_philo	*cur;
 	t_philo	*first;
 	int		id;
 
-	first = create_philo(s_input, 1);
+	first = create_philo(table, 1);
 	if (!first)
 		return (NULL);
 	id = 1;
 	cur = first;
-	while (++id <= s_input->num_philos)
+	while (++id <= table->num_philos)
 	{
-		cur->next = create_philo(s_input, id);
-		if (id == s_input->num_philos)
+		cur->next = create_philo(table, id);
+		if (!cur->next)
+			return (NULL);
+		if (id == table->num_philos)
 			break;
 		cur->next->left = &(cur->right);
 		cur = cur->next;
 	}
 	first->left = &(cur->next->right); // assign last fork to be left of first
 	cur->next->next = first; // assign next to last
+	setup_table(table, first);
 	return (first);
 }
-
