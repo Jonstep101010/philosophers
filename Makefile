@@ -20,7 +20,7 @@ SRC			:= main.c
 SRC_IO		:= parse_input.c ft_atol.c
 SRC_SETUP	:= set_philos.c
 SRC_UTILS	:= ft_calloc.c checks.c cleanup.c time.c
-SRC_SIM		:= philo.c
+SRC_SIM		:= sim.c
 
 SRCS		:= $(SRC) $(SRC_IO) $(SRC_SETUP) $(SRC_UTILS) $(SRC_SIM)
 

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:36:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/10 09:25:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/12 19:59:05 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ typedef enum	e_err_table
 typedef struct s_philo t_philo;
 typedef struct s_table
 {
-	time_t	start_time;
+	time_t			start_time;
 	int				num_philos;
 	int				time_to_die;
+	int				time_to_think;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				meals_to_eat;
 	bool			dead;
 	pthread_t		thread;
 	pthread_mutex_t	death;
+	pthread_mutex_t	printing;
 	t_philo			**philo_list;
 }	t_table;
 
