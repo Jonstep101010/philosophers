@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/12 17:41:16 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:49:27 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,6 @@ t_philo	*create_philo(t_table *table, int id)
 }
 
 /**
- * @brief
- * @warning indexing starts at 0, index num_philos points to NULL
- * @param table
- * @param first
- */
-void	setup_table(t_table *table, t_philo *cur)
-{
-	int		i;
-
-	if (!table)
-		return ;
-	i = -1;
-	cur->table = table;
-	table->philo_list = ft_calloc(table->num_philos + 1, sizeof(t_philo *));
-	table->philo_list[table->num_philos] = NULL;
-	while (++i < table->num_philos)
-	{
-		table->philo_list[i] = cur;
-		pthread_create(&cur->thread_id, NULL, philo_routine, cur);
-		cur = cur->next;
-	}
-}
-
-/**
  * @brief Set the firsts object
  *
  * @param table
@@ -73,9 +49,9 @@ t_philo	*set_philos(t_table *table)
 	int		id;
 
 	first = create_philo(table, 1);
-	first->table = table;
 	if (!first)
 		return (NULL);
+	first->table = table;
 	id = 1;
 	cur = first;
 	while (++id <= table->num_philos)
@@ -91,6 +67,5 @@ t_philo	*set_philos(t_table *table)
 	}
 	first->left = &(cur->next->right); // assign last fork to be left of first
 	cur->next->next = first; // assign next to last
-	setup_table(table, first);
 	return (first);
 }

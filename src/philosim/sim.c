@@ -6,17 +6,17 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/12 20:09:30 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:24:15 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
 
-void	take_fork(t_philo *philo, int n)
+void	take_fork(t_philo *philo)
 {
 	if (philo)
-		printf("%lu philo %d has taken a fork\n", timestamp(philo->table), n);
+		print_message(philo, "has taken a fork");
 }
 
 void	select_fork(t_philo *philo)
@@ -24,44 +24,49 @@ void	select_fork(t_philo *philo)
 	if (philo->id == philo->table->num_philos)
 	{
 		pthread_mutex_lock(&philo->right);
-		take_fork(philo, philo->id);
+		take_fork(philo);
 		pthread_mutex_lock(philo->left);
-		take_fork(philo, philo->id);
+		take_fork(philo);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->left);
-		take_fork(philo, philo->id);
+		take_fork(philo);
 		pthread_mutex_lock(&philo->right);
-		take_fork(philo, philo->id);
+		take_fork(philo);
 	}
 
 }
 
 void	eating(t_philo *philo)
 {
-	// check if philo is valid
 	if (philo)
 	{
-		if (timestamp(philo->table) > (unsigned int)philo->table->time_to_die)
+		if (get_time_ms() - philo->time_since_meal > (unsigned int)philo->table->time_to_die && get_time_ms() - philo->table->start_time > philo->table->time_to_die)
 		{
-			printf("%lu philo %d had died\n", timestamp(philo->table), philo->id);
+			print_message(philo, "has died");
 			pthread_mutex_lock(&philo->table->death);
 			philo->table->dead = true;
 			pthread_mutex_unlock(&philo->table->death);
+			return ;
 		}
 		select_fork(philo);
-		philo->time_since_meal = get_time_ms();
-		printf("%lu philo %d is eating\n", timestamp(philo->table), philo->id);
+		philo->time_since_meal = timestamp(philo->table);
+		print_message(philo, "is eating");
 		p_sleep(philo->table->time_to_eat);
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(&philo->right);
 		// p_sleep(philo->table->time_to_sleep);
 	}
+}
 
-	// take forks
-	// eat
-	// put forks
+void	sleeping(t_philo *philo)
+{
+	if (philo)
+	{
+		print_message(philo, "is sleeping");
+		p_sleep(philo->table->time_to_sleep);
+	}
 }
 void	*philo_routine(void *arg)
 {
@@ -80,7 +85,6 @@ void	*philo_routine(void *arg)
 		pthread_mutex_unlock(&(philo->table->death));
 		if (dead)
 		{
-			printf("philo %d is dead\n", philo->id);
 			break;
 		}
 		// eat
@@ -89,14 +93,11 @@ void	*philo_routine(void *arg)
 		// p_sleep(philo->table->time_to_eat);
 
 		// sleep
-		printf("%lu philo %d is sleeping\n", timestamp(philo->table), philo->id);
-		p_sleep(philo->table->time_to_sleep);
+		sleeping(philo);
 
 		// think
-		printf("%lu philo %d is thinking\n", timestamp(philo->table), philo->id);
-		p_sleep(philo->table->time_to_think);
+		print_message(philo, "is thinking");
 	}
-	printf("some philo data from thread: %d\n", philo->id);
 	return (NULL);
 }
 
@@ -122,24 +123,43 @@ void	*table_routine(void *arg)
 	return (NULL);
 }
 
+
+/**
+ * @brief
+ * @warning indexing starts at 0, index num_philos points to NULL
+ * @param table
+ * @param first
+ */
+void	setup_table(t_table *table, t_philo *cur)
+{
+	int		i;
+
+	if (!table)
+		return ;
+	i = -1;
+	cur->table = table;
+	table->philo_list = ft_calloc(table->num_philos + 1, sizeof(t_philo *));
+	table->philo_list[table->num_philos] = NULL;
+	while (++i < table->num_philos)
+	{
+		table->philo_list[i] = cur;
+		pthread_create(&cur->thread_id, NULL, philo_routine, cur);
+		cur = cur->next;
+	}
+}
+
 	// pthread_detach??
 t_err_table	simulation(t_philo *philos, t_table *table)
 {
-	// if (pthread_create(&(table->thread), NULL, table_routine, table) != 0)
-	// 	return (TABLE_CREATE);
+	setup_table(table, philos);
+	if (pthread_create(&(table->thread), NULL, table_routine, table) != 0)
+		return (TABLE_CREATE);
 	// // pthread_create(&(table->thread), NULL, table_routine, table);
 	(void)philos;
-	// if (pthread_join(table->thread, NULL) != 0)
-	// 	return (TABLE_JOIN);
-	table_routine(table);
+	if (pthread_join(table->thread, NULL) != 0)
+		return (TABLE_JOIN);
+	// table_routine(table);
 	return (TABLE_OK);
-	// (void)rules;
-	// (void)philos;
 	// spawn threads for philos (each with own routine)
-	// spawn table for supervision
-	// t_sim	*sim;
 
-	// if (rules->num_philos % 2 == 0)
-	// 	even_number_philos
-	// if (pthread_create(philos->thread_id, , &philo_routine, philos))
 }

@@ -1,10 +1,8 @@
 {
-    "ceedlingExplorer.projectPath": ".",
+    "ceedlingExplorer.projectPath": "./",
 	"ceedlingExplorer.shellPath": "zsh",
 	"editor.insertSpaces": false,
 	"testExplorer.useNativeTesting": true,
 	"C_Cpp.codeAnalysis.clangTidy.enabled": true,
-	"files.exclude": {
-		".*/": true,
-	}
+	"ceedlingExplorer.debugConfiguration": "ceedlingExplorer"
 }

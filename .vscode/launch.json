@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ceedlingExplorer",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/.build_test/test/out/test_set_philos/${command:ceedlingExplorer.debugTestExecutable}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "debugConfiguration": {
+                "description": "Debug configuration to run during test debug.",
+                "type": "string",
+                "scope": "resource"
+              },
+            "problemMatching": {
+                "mode": "gcc"
+            }
+        }
+    ]
+}

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:19:15 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/10 07:22:27 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:01:14 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,10 @@ void	p_sleep(time_t duration)
 	i = get_time_ms();
 	while (get_time_ms() - i < duration)
 		usleep(50);
+}
+
+#include "struct.h"
+time_t	timestamp(t_table *table)
+{
+	return ((get_time_ms() - table->start_time));
 }

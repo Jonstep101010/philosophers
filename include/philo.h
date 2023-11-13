@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/10 15:50:05 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:03:05 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 # include "utils/cleanup.h"
 # include "utils/checks.h"
 # include "utils/time.h"
+# include "philosim/printing.h"
 
 # ifndef TEST
 void	*philo_routine(void *arg);
+void	setup_table(t_table *table, t_philo *first);
 t_err_table	simulation(t_philo *philos, t_table *rules);
 # endif
 #endif //PHILO_H (actual philo header that will be used in the project)

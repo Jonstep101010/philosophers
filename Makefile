@@ -6,7 +6,8 @@ NAME		  := philo
 INCS		= ./include \
 				./include/io \
 				./include/setup \
-				./include/utils
+				./include/utils \
+				./include/philosim
 
 BUILD_DIR	:= .build
 
@@ -20,7 +21,7 @@ SRC			:= main.c
 SRC_IO		:= parse_input.c ft_atol.c
 SRC_SETUP	:= set_philos.c
 SRC_UTILS	:= ft_calloc.c checks.c cleanup.c time.c
-SRC_SIM		:= sim.c
+SRC_SIM		:= sim.c printing.c
 
 SRCS		:= $(SRC) $(SRC_IO) $(SRC_SETUP) $(SRC_UTILS) $(SRC_SIM)
 
@@ -79,7 +80,7 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 # git submodule update --init --recursive
-INPUT	= 4 400 300 200
+INPUT	= 2 800 200 200
 
 update: fclean
 	git stash
@@ -87,7 +88,7 @@ update: fclean
 	git stash pop
 
 run: all
-	./$(NAME) 4 400 300 200 
+	./$(NAME) 2 800 200 200 
 
 norme:
 	clear
@@ -98,7 +99,7 @@ memcheck: all
 
 debug: all
 	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes \
-	./$(NAME) 4 400 300 200
+	./$(NAME) 2 800 200 200
 
 # test:
 # 	cd ./../tests-pipex && sh ./test.sh
