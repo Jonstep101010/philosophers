@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 07:12:35 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/13 11:05:36 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:24:54 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	mock_print_message(t_philo *philo, char *msg)
 void	print_message(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->table->printing);
-	printf("%lu %d %s\n", timestamp(philo->table), philo->id, msg);
+	if (!philo->table->dead)
+		printf("%lu %d %s\n", timestamp(philo->table), philo->id, msg);
 	pthread_mutex_unlock(&philo->table->printing);
 }
 #endif

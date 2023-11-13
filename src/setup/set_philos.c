@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/13 10:49:27 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:43:36 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_philo	*create_philo(t_table *table, int id)
 	new->id = id;
 	new->input = table;
 	pthread_mutex_init(&(new->right), NULL);
+	pthread_mutex_init(&new->mutex, NULL);
 	return (new);
 }
 

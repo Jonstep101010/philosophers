@@ -41,28 +41,6 @@ void tearDown(void)
 // 	// TEST_ASSERT_EQUAL(PTHREAD_MUTEX_INITIALIZER, new_philo->right);
 // }
 
-
-// @warning should only be static anyway
-// checks are made anyway, should not happen since caller (set_philos) is responsible for catching invalid input
-// void test_create_philo_returns_null_when_id_greater_than_num_philos(void)
-// {
-// 	t_table table = {0};
-// @brief if no num_philos set, main will return invalid_input info to user
-// 	t_philo *new_philo = create_philo(&table, 2);
-// 	TEST_ASSERT_NULL(new_philo);
-// }
-
-// void test_setup_table_assigns_philo_list_correctly(void)
-// {
-// 	t_table	table;
-// 	memset(&table, 0, sizeof(table));
-// 	table.num_philos = 1;
-// 	t_philo *first_philo = create_philo(&table, 1);
-// 	setup_table(&table, first_philo);
-// 	TEST_ASSERT_NOT_NULL(table.philo_list);
-// 	TEST_ASSERT_EQUAL_PTR(first_philo, table.philo_list[0]);
-// }
-
 void test_setup_table_handles_null(void)
 {
 	t_table *table = {0};
@@ -88,3 +66,24 @@ void test_set_philos_returns_null_invalid_table(void)
 	t_philo *first_philo = set_philos(NULL);
 	TEST_ASSERT_NULL(first_philo);
 }
+
+// @warning should only be static anyway
+// checks are made anyway, should not happen since caller (set_philos) is responsible for catching invalid input
+// void test_create_philo_returns_null_when_id_greater_than_num_philos(void)
+// {
+// 	t_table table = {0};
+// @brief if no num_philos set, main will return invalid_input info to user
+// 	t_philo *new_philo = create_philo(&table, 2);
+// 	TEST_ASSERT_NULL(new_philo);
+// }
+
+// void test_setup_table_assigns_philo_list_correctly(void)
+// {
+// 	t_table	table;
+// 	memset(&table, 0, sizeof(table));
+// 	table.num_philos = 1;
+// 	t_philo *first_philo = create_philo(&table, 1);
+// 	setup_table(&table, first_philo);
+// 	TEST_ASSERT_NOT_NULL(table.philo_list);
+// 	TEST_ASSERT_EQUAL_PTR(first_philo, table.philo_list[0]);
+// }
