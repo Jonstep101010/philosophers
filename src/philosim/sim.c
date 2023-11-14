@@ -6,26 +6,12 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 09:26:56 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:47:10 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
-
-bool	philo_is_dead(t_philo *philo)
-{
-	bool	dead;
-
-	if (philo)
-	{
-		pthread_mutex_lock(&philo->table->death);
-		dead = philo->table->dead;
-		pthread_mutex_unlock(&philo->table->death);
-		return (dead);
-	}
-	return (false);
-}
 
 // responsible for supervising philos
 void	*table_routine(void *arg)

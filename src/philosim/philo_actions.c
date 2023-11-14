@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 12:42:49 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:55:51 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,20 @@ static void	select_forks(t_philo *philo)
 	}
 }
 
-void	eating(t_philo *philo)
+static bool	philo_is_dead(t_philo *philo)
 {
+	bool	dead;
+
+	pthread_mutex_lock(&philo->table->death);
+	dead = philo->table->dead;
+	pthread_mutex_unlock(&philo->table->death);
+	return (dead);
+}
+
+bool	eating(t_philo *philo)
+{
+	if (philo_is_dead(philo) || philo->meal_count == 0)
+		return (false);
 	if (philo)
 	{
 		select_forks(philo);
@@ -51,6 +63,7 @@ void	eating(t_philo *philo)
 		philo->meal_count--;
 		pthread_mutex_unlock(&philo->mutex);
 	}
+	return (true);
 }
 
 void	thinking(t_philo *philo)
