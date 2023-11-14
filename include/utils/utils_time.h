@@ -4,6 +4,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <stddef.h>
+#include "struct.h"
 
 time_t	get_time_ms(void);
 void	p_sleep(time_t duration);

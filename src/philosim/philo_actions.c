@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 12:55:51 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:03:59 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static bool	philo_is_dead(t_philo *philo)
 
 bool	eating(t_philo *philo)
 {
-	if (philo_is_dead(philo) || philo->meal_count == 0)
+	if (philo_is_dead(philo))
 		return (false);
 	if (philo)
 	{
@@ -63,6 +63,8 @@ bool	eating(t_philo *philo)
 		philo->meal_count--;
 		pthread_mutex_unlock(&philo->mutex);
 	}
+	if (philo->meal_count == 0)
+		return (false);
 	return (true);
 }
 

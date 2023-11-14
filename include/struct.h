@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:36:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/13 15:42:59 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:57:26 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ struct s_philo
 	pthread_t		thread_id;
 	int				id;
 	t_philo			*next;
-	t_table			*input;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	right;
 	pthread_mutex_t	mutex;

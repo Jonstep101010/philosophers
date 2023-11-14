@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 08:45:24 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:07:57 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,14 @@ t_philo	*create_philo(t_table *table, int id)
 	if (!new)
 		return (NULL);
 	new->id = id;
-	new->input = table;
+	new->table = table;
 	new->meal_count = table->meals_to_eat;
+	new->next = new;
 	pthread_mutex_init(&(new->right), NULL);
 	pthread_mutex_init(&new->mutex, NULL);
 	return (new);
 }
 
-/**
- * @brief Set the firsts object
- *
- * @param table
- */
 t_philo	*set_philos(t_table *table)
 {
  	t_philo	*cur;
@@ -53,15 +49,12 @@ t_philo	*set_philos(t_table *table)
 	first = create_philo(table, 1);
 	if (!first)
 		return (NULL);
-	first->table = table;
-	first->next = first;
-	id = 1;
 	cur = first;
+	id = 1;
 	while (++id <= table->num_philos)
 	{
 		cur->next = create_philo(table, id);
-		cur->next->table = table;
-		cur->next->left = &(cur->right);
+		cur->next->left = &cur->right;
 		if (!cur->next)
 			return (NULL);
 		if (id == table->num_philos)

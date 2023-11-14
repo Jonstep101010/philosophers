@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 12:54:53 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:30:25 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // bool	philo_is_dead(t_philo *philo);
 void	*philo_routine(void *arg);
 void	setup_table(t_table *table, t_philo *first);
-t_err_table	simulation(t_philo *philos, t_table *rules);
+void	simulation(t_philo *philos, t_table *rules);
 
 // philo actions in routine
 bool	eating(t_philo *philo);

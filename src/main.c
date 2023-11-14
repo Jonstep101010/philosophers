@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:45:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/10 09:23:19 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:30:54 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ int main(int ac, char **av)
 	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
 		return (wrong_input());
 	s_philo = set_philos(table);
-	if (simulation(s_philo, table) != TABLE_OK)
-		printf("Error in table thread handling\n");
+	simulation(s_philo, table);
 	deconstruct(s_philo, table);
-	// free(s_philo);
-	// s_philo = NULL;
 	return (0);
 }
 #endif // protect against duplicate main for testing
