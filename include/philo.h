@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/13 15:03:07 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 13:20:31 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "utils/utils.h"
 # include "utils/cleanup.h"
 # include "utils/checks.h"
-# include "utils/time.h"
+# include "utils/utils_time.h"
 # include "philosim/printing.h"
 
 # ifndef TEST
