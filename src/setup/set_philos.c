@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:57:39 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/13 15:43:36 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 08:45:24 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_philo	*create_philo(t_table *table, int id)
 		return (NULL);
 	new->id = id;
 	new->input = table;
+	new->meal_count = table->meals_to_eat;
 	pthread_mutex_init(&(new->right), NULL);
 	pthread_mutex_init(&new->mutex, NULL);
 	return (new);
@@ -53,6 +54,7 @@ t_philo	*set_philos(t_table *table)
 	if (!first)
 		return (NULL);
 	first->table = table;
+	first->next = first;
 	id = 1;
 	cur = first;
 	while (++id <= table->num_philos)
@@ -67,6 +69,7 @@ t_philo	*set_philos(t_table *table)
 		cur = cur->next;
 	}
 	first->left = &(cur->next->right); // assign last fork to be left of first
-	cur->next->next = first; // assign next to last
+	if (table->num_philos > 1)
+		cur->next->next = first; // assign next to last
 	return (first);
 }
