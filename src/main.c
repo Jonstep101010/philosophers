@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:45:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 14:30:54 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:23:50 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,18 @@ pthread_mutex_unlock
 // {
 // 	system("leaks philo");
 // }
-	// atexit(leaks_check);
+// atexit(leaks_check);
 
 #ifndef TEST
 int main(int ac, char **av)
 {
-	t_philo	*s_philo;
 	t_table	*table;
 
 	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
 		return (wrong_input());
-	s_philo = set_philos(table);
-	simulation(s_philo, table);
-	deconstruct(s_philo, table);
+	setup_table(table);
+	simulation(table);
+	deconstruct(table);
 	return (0);
 }
 #endif // protect against duplicate main for testing

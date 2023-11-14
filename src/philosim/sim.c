@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 15:16:25 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:27:56 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,16 @@ static bool	philos_have_eaten(t_philo *philo, int *tmp_id)
 	return (false);
 }
 
-void	simulation(t_philo *philo, t_table *table)
+void	simulation(t_table *table)
 {
+	t_philo	*philo;
+	philo = table->philo_list[0];
 	int	i;
 
+	i = -1;
+	while (++i < table->num_philos)
+		pthread_create(&table->philo_list[i]->thread_id, NULL, philo_routine, table->philo_list[i]);
+	i = 0;
 	while (1)
 	{
 		pthread_mutex_lock(&philo->mutex);
