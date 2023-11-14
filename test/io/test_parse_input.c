@@ -4,7 +4,7 @@
 #include "../../src/io/ft_atol.c"
 #include "../../src/utils/checks.c"
 #include "../../src/utils/ft_calloc.c"
-#include "../../src/utils/time.c"
+#include "../../src/utils/utils_time.c"
 
 #include "unity.h"
 
