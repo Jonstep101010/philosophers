@@ -20,7 +20,7 @@ VPATH		:= src/ src/io src/setup src/utils src/philosim
 SRC			:= main.c
 SRC_IO		:= parse_input.c ft_atol.c
 SRC_SETUP	:= set_philos.c
-SRC_UTILS	:= ft_calloc.c checks.c cleanup.c time.c
+SRC_UTILS	:= ft_calloc.c checks.c cleanup.c utils_time.c
 SRC_SIM		:= sim.c printing.c routine.c
 
 SRCS		:= $(SRC) $(SRC_IO) $(SRC_SETUP) $(SRC_UTILS) $(SRC_SIM)
@@ -80,7 +80,6 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 # git submodule update --init --recursive
-INPUT	= 2 800 200 200
 
 update: fclean
 	git stash
@@ -88,18 +87,17 @@ update: fclean
 	git stash pop
 
 run: all
-	./$(NAME) 2 800 200 200 
+	./$(NAME) 4 300 200 200 
 
 norme:
 	clear
 	-norminette src/ | grep Error
 
 memcheck: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(INPUT)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 1001 400 450 3
 
-debug: all
-	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes \
-	./$(NAME) 2 800 200 200
+debug: all#--log-file=valgrind.log  
+	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes ./$(NAME) 4 1001 200 200 3
 
 # test:
 # 	cd ./../tests-pipex && sh ./test.sh
