@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:42:19 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:28:36 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:03:26 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	wrong_input(void)
 void	free_philo(t_philo *philo)
 {
 	pthread_mutex_destroy(&(philo->right));
-	pthread_mutex_destroy(&(philo->mutex));
 	free(philo);
 	philo = NULL;
 }

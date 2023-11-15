@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:36:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 17:32:50 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:03:17 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ struct					s_philo
 	t_philo				*next;
 	pthread_mutex_t		*left;
 	pthread_mutex_t		right;
-	pthread_mutex_t		mutex;
 	t_table				*table;
 	int					meal_count;
 	time_t				time_since_meal;

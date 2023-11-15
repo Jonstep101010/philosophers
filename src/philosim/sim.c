@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 17:44:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:28:38 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static bool	philo_starving(t_philo *philo)
 {
-	if (philo->meal_count == 0)
-		return (false);
 	pthread_mutex_lock(&philo->table->death);
+	if (philo->meal_count == 0)
+	{
+		pthread_mutex_unlock(&philo->table->death);
+		return (false);
+	}
 	if (timestamp(philo->start_time)
 		- philo->time_since_meal > philo->table->time_to_die)
 	{
@@ -27,12 +30,13 @@ static bool	philo_starving(t_philo *philo)
 		pthread_mutex_unlock(&philo->table->death);
 		return (true);
 	}
-		pthread_mutex_unlock(&philo->table->death);
+	pthread_mutex_unlock(&philo->table->death);
 	return (false);
 }
 
 static bool	philos_have_eaten(t_philo *philo, int *tmp_id)
 {
+	pthread_mutex_lock(&philo->table->death);
 	if (philo->meal_count == 0)
 	{
 		*tmp_id = philo->id;
@@ -44,8 +48,12 @@ static bool	philos_have_eaten(t_philo *philo, int *tmp_id)
 			philo = philo->next;
 		}
 		if (philo->id == *tmp_id)
+		{
+			pthread_mutex_unlock(&philo->table->death);
 			return (true);
+		}
 	}
+	pthread_mutex_unlock(&philo->table->death);
 	return (false);
 }
 
@@ -63,13 +71,13 @@ void	simulation(t_table *table)
 	i = 0;
 	while (1)
 	{
-		pthread_mutex_lock(&philo->mutex);
+		// pthread_mutex_lock(&philo->mutex);
 		if (philo_starving(philo) || philos_have_eaten(philo, &i))
 		{
-			pthread_mutex_unlock(&philo->mutex);
+			// pthread_mutex_unlock(&philo->mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->mutex);
+		// pthread_mutex_unlock(&philo->mutex);
 		philo = philo->next;
 	}
 	i = -1;

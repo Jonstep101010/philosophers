@@ -33,7 +33,7 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
-CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread #-Wpedantic
+CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread -fsanitize=thread#-Wpedantic
 # DBGFLAGS	?=
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 # LDFLAGS		= $(addprefix -L, $(dir $(LIB_FT)))
@@ -97,7 +97,7 @@ memcheck: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 1001 400 450 3
 
 debug: all#--log-file=valgrind.log  
-	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes ./$(NAME) 4 1001 400 450 3
+	valgrind --tool=helgrind ./$(NAME) 3 80000 200 200
 
 # test:
 # 	cd ./../tests-pipex && sh ./test.sh
