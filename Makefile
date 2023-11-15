@@ -97,7 +97,7 @@ memcheck: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 1001 400 450 3
 
 debug: all#--log-file=valgrind.log  
-	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes ./$(NAME) 1 800 200 200
+	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes ./$(NAME) 4 1001 400 450 3
 
 # test:
 # 	cd ./../tests-pipex && sh ./test.sh

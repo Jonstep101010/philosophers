@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:19:15 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:27:38 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:29:18 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	p_sleep(time_t duration)
 		usleep(50);
 }
 
-time_t	timestamp(t_table *table)
+time_t	timestamp(time_t start_time)
 {
-	return ((get_time_ms() - table->start_time));
+	return ((get_time_ms() - start_time));
 }

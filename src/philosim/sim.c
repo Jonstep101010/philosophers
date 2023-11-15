@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:25:59 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:44:03 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ static bool	philo_starving(t_philo *philo)
 {
 	if (philo->meal_count == 0)
 		return (false);
-	if (timestamp(philo->table)
+	pthread_mutex_lock(&philo->table->death);
+	if (timestamp(philo->start_time)
 		- philo->time_since_meal > philo->table->time_to_die)
 	{
+		pthread_mutex_unlock(&philo->table->death);
 		print_message(philo, "has died");
 		pthread_mutex_lock(&philo->table->death);
 		philo->table->dead = true;
 		pthread_mutex_unlock(&philo->table->death);
-		pthread_mutex_unlock(&philo->mutex);
 		return (true);
 	}
+		pthread_mutex_unlock(&philo->table->death);
 	return (false);
 }
 
@@ -63,7 +65,10 @@ void	simulation(t_table *table)
 	{
 		pthread_mutex_lock(&philo->mutex);
 		if (philo_starving(philo) || philos_have_eaten(philo, &i))
+		{
+			pthread_mutex_unlock(&philo->mutex);
 			break ;
+		}
 		pthread_mutex_unlock(&philo->mutex);
 		philo = philo->next;
 	}

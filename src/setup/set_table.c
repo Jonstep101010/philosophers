@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:28:52 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 10:06:04 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:35:07 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_philo	*create_philo(t_table *table, int id)
 	new->table = table;
 	new->meal_count = table->meals_to_eat;
 	new->next = new;
+	new->start_time = table->start_time;
 	assign_philos(table, new);
 	return (new);
 }
@@ -57,6 +58,7 @@ void	*setup(t_table *table)
 
 	if (!table || !table->num_philos)
 		return (NULL);
+	table->start_time = get_time_ms();
 	i = -1;
 	table->philo_list = ft_calloc(table->num_philos + 1, sizeof(t_philo *));
 	if (!table->philo_list)

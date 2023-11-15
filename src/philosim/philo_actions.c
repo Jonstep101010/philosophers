@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 09:55:41 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 17:35:45 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ bool	eating(t_philo *philo)
 	{
 		if (!select_forks(philo))
 			return (false);
-		pthread_mutex_lock(&philo->mutex);
-		philo->time_since_meal = timestamp(philo->table);
-		pthread_mutex_unlock(&philo->mutex);
+		else
+			philo->time_since_meal = timestamp(philo->start_time);
+		// pthread_mutex_lock(&philo->mutex);
+		// pthread_mutex_unlock(&philo->mutex);
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(&philo->right);
 		print_message(philo, "is eating");
