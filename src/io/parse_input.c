@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:23:11 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:04:15 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ static bool	is_valid_nbr(int ac, char **av)
 }
 
 // @warning does not use actual time
-// @follow-up rules for death/printing? (mutex?)
 static t_table	*init_ruletable(int ac, char **av)
 {
 	t_table	*table;
 
 	table = (t_table *)ft_calloc(1, sizeof(t_table));
+	if (!table)
+		return (NULL);
 	table->start_time = get_time_ms();
 	table->num_philos = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]);
@@ -54,8 +55,10 @@ static t_table	*init_ruletable(int ac, char **av)
 	table->meals_to_eat = INT_MIN;
 	table->dead = false;
 	pthread_mutex_init(&(table->death), NULL);
-	if (ac == 6 && ft_atol(av[5]) >= 0)
+	if (ac == 6 && ft_atol(av[5]) >= 0 && table->num_philos > 1)
 		table->meals_to_eat = ft_atol(av[5]);
+	// if (ac == 6 && table->num_philos < 2)
+	// 	return (NULL);
 	return (table);
 }
 

@@ -5,7 +5,7 @@
             "name": "ceedlingExplorer",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/.build_test/test/out/test_set_philos/${command:ceedlingExplorer.debugTestExecutable}",
+            "program": "${workspaceFolder}/.build_test/test/out/test_set_table/${command:ceedlingExplorer.debugTestExecutable}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

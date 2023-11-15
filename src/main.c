@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:45:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:21:15 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 07:57:17 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 
 	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
 		return (wrong_input());
-	setup_table(table);
+	setup(table);
 	simulation(table);
 	deconstruct(table);
 	return (0);

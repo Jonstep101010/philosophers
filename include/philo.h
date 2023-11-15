@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 18:23:09 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:06:13 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 // files that represent mock headers for the source files to test
 # include "io/parse_input.h"
-# include "setup/set_philos.h"
+# include "setup/set_table.h"
 # include "utils/utils.h"
 # include "utils/cleanup.h"
 # include "utils/checks.h"
@@ -32,7 +32,7 @@
 # ifndef TEST
 // bool	philo_is_dead(t_philo *philo);
 void	*philo_routine(void *arg);
-void	setup_table(t_table *table);
+void	*setup(t_table *table);
 void	simulation(t_table *rules);
 
 // philo actions in routine

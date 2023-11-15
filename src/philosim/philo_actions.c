@@ -6,13 +6,13 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 15:03:59 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 09:55:41 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	select_forks(t_philo *philo)
+static bool	select_forks(t_philo *philo)
 {
 	if (philo->id == philo->table->num_philos)
 	{
@@ -21,7 +21,7 @@ static void	select_forks(t_philo *philo)
 		if (philo->table->num_philos == 1)
 		{
 			pthread_mutex_unlock(&philo->right);
-			return ;
+			return (false);
 		}
 		pthread_mutex_lock(philo->left);
 		print_message(philo, "has taken a fork");
@@ -33,6 +33,7 @@ static void	select_forks(t_philo *philo)
 		pthread_mutex_lock(&philo->right);
 		print_message(philo, "has taken a fork");
 	}
+	return (true);
 }
 
 static bool	philo_is_dead(t_philo *philo)
@@ -51,14 +52,15 @@ bool	eating(t_philo *philo)
 		return (false);
 	if (philo)
 	{
-		select_forks(philo);
+		if (!select_forks(philo))
+			return (false);
 		pthread_mutex_lock(&philo->mutex);
 		philo->time_since_meal = timestamp(philo->table);
 		pthread_mutex_unlock(&philo->mutex);
-		print_message(philo, "is eating");
-		p_sleep(philo->table->time_to_eat);
 		pthread_mutex_unlock(philo->left);
 		pthread_mutex_unlock(&philo->right);
+		print_message(philo, "is eating");
+		p_sleep(philo->table->time_to_eat);
 		pthread_mutex_lock(&philo->mutex);
 		philo->meal_count--;
 		pthread_mutex_unlock(&philo->mutex);

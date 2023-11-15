@@ -19,7 +19,7 @@ VPATH		:= src/ src/io src/setup src/utils src/philosim
 
 SRC			:= main.c
 SRC_IO		:= parse_input.c ft_atol.c
-SRC_SETUP	:= set_philos.c set_table.c
+SRC_SETUP	:= set_table.c
 SRC_UTILS	:= ft_calloc.c checks.c cleanup.c utils_time.c
 SRC_SIM		:= sim.c printing.c routine.c philo_actions.c
 
@@ -97,7 +97,7 @@ memcheck: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 1001 400 450 3
 
 debug: all#--log-file=valgrind.log  
-	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes ./$(NAME) 4 1001 200 200 3
+	valgrind --tool=helgrind --check-stack-refs=yes --track-lockorders=yes ./$(NAME) 1 800 200 200
 
 # test:
 # 	cd ./../tests-pipex && sh ./test.sh
