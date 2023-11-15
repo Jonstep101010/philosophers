@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 12:55:38 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:24:47 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*philo_routine(void *arg)
 	while (1)
 	{
 		if (!eating(philo))
-			break;
+			break ;
 		sleeping(philo);
 		thinking(philo);
 	}

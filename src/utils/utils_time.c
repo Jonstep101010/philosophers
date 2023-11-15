@@ -6,28 +6,28 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:19:15 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 16:39:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:27:38 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef TEST
-#include "utils_time.h"
-#include "struct.h"
+# include "struct.h"
+# include "utils_time.h"
 #else
-#include "philo.h"
+# include "philo.h"
 #endif
 
 #include <sys/time.h>
+#include <unistd.h>
+
 time_t	get_time_ms(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-#include <unistd.h>
 void	p_sleep(time_t duration)
 {
 	time_t	i;

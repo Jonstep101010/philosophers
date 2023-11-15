@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 07:12:35 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/13 16:45:19 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:25:47 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 # include "philo.h"
 #endif
 #ifdef TEST
+
 # include "struct.h"
-# include <sys/time.h>
 # include <stddef.h>
+# include <sys/time.h>
+
 time_t	mock_get_time_ms(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
@@ -30,6 +31,7 @@ unsigned long	mock_timestamp(t_table *table)
 {
 	return ((mock_get_time_ms() - table->start_time));
 }
+
 void	mock_print_message(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->table->printing);
@@ -41,6 +43,7 @@ void	mock_print_message(t_philo *philo, char *msg)
 // use timestamp, philo id, msg, color?
 // @follow-up need to implement color
 #ifndef TEST
+
 void	print_message(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->table->printing);
@@ -51,5 +54,3 @@ void	print_message(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->table->printing);
 }
 #endif
-
-

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:36:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 16:57:26 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:29:59 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,44 +16,43 @@
 # include <pthread.h>
 # include <stdbool.h>
 
-typedef enum	e_err_table
+typedef enum e_err_table
 {
 	TABLE_CREATE,
 	TABLE_JOIN,
 	TABLE_OK
-}	t_err_table;
+}						t_err_table;
 
-typedef struct s_philo t_philo;
+typedef struct s_philo	t_philo;
 typedef struct s_table
 {
-	time_t			start_time;
-	int				num_philos;
-	int				time_to_die;
-	int				time_to_think;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				meals_to_eat;
-	bool			dead;
-	pthread_t		thread;
-	pthread_mutex_t	death;
-	pthread_mutex_t	printing;
-	t_philo			**philo_list;
-}	t_table;
-
+	time_t				start_time;
+	int					num_philos;
+	int					time_to_die;
+	int					time_to_think;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					meals_to_eat;
+	bool				dead;
+	pthread_t			thread;
+	pthread_mutex_t		death;
+	pthread_mutex_t		printing;
+	t_philo				**philo_list;
+}						t_table;
 
 // typedef pthread_mutex_t ptm_t;
 /*store individual philo*/
-struct s_philo
+struct					s_philo
 {
-	pthread_t		thread_id;
-	int				id;
-	t_philo			*next;
-	pthread_mutex_t	*left;
-	pthread_mutex_t	right;
-	pthread_mutex_t	mutex;
-	t_table			*table;
-	int				meal_count;
-	time_t			time_since_meal;
+	pthread_t			thread_id;
+	int					id;
+	t_philo				*next;
+	pthread_mutex_t		*left;
+	pthread_mutex_t		right;
+	pthread_mutex_t		mutex;
+	t_table				*table;
+	int					meal_count;
+	time_t				time_since_meal;
 };
 
 #endif

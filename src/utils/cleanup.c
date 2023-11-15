@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:42:19 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/14 19:45:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:28:36 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @brief tell user how to supply correct input
  * @return programs exit code
  */
-int		wrong_input()
+int	wrong_input(void)
 {
 	printf("Some kind of Error message\n");
 	return (EXIT_FAILURE);
@@ -38,21 +38,11 @@ void	free_philo(t_philo *philo)
 
 void	deconstruct(t_table *rules)
 {
-	t_philo	*philo;
+	int	i;
 
-	philo = rules->philo_list[0];
-	// t_philo	*tmp;
-	int i = -1;
+	i = -1;
 	while (++i < rules->num_philos)
-	{
 		free_philo(rules->philo_list[i]);
-		// philo = philo->next;
-	}
-	// {
-	// 	tmp = philo->next;
-	// 	free_philo(philo);
-	// 	philo = tmp;
-	// }
 	pthread_mutex_destroy(&rules->death);
 	pthread_mutex_destroy(&rules->printing);
 	free(rules->philo_list);

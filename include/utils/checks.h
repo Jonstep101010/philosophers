@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checks.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/15 08:31:18 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/11/15 08:31:40 by jschwabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHECKS_H
-#define CHECKS_H
-#include <stdlib.h>
+# define CHECKS_H
+# include <stdlib.h>
+
 int	ft_isdigit(int c);
 #endif // CHECKS_H

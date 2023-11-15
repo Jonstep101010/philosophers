@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/10 09:10:38 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:23:11 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static bool	is_valid_nbr(int ac, char **av)
 {
-	int	i;
-	int	ii;
+	int		i;
+	int		ii;
 	long	nbr;
 
 	i = 0;
@@ -45,8 +45,8 @@ static t_table	*init_ruletable(int ac, char **av)
 {
 	t_table	*table;
 
-	table = (t_table *) ft_calloc(1, sizeof(t_table));
-	table->start_time = get_time_ms();// (@todo get_time_ms)
+	table = (t_table *)ft_calloc(1, sizeof(t_table));
+	table->start_time = get_time_ms();
 	table->num_philos = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
