@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 19:42:32 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:08:14 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ bool	eating(t_philo *philo)
 			return (false);
 		else
 		{
-		pthread_mutex_lock(&philo->table->death);
+			pthread_mutex_lock(&philo->table->death);
 			philo->time_since_meal = timestamp(philo->start_time);
-		pthread_mutex_unlock(&philo->table->death);
+			pthread_mutex_unlock(&philo->table->death);
 		}
-		// pthread_mutex_lock(&philo->mutex);
-		// pthread_mutex_unlock(&philo->mutex);
 		pthread_mutex_lock(&philo->table->death);
 		philo->meal_count--;
 		pthread_mutex_unlock(&philo->table->death);

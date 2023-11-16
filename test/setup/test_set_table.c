@@ -7,6 +7,7 @@
 #include "set_table.h"
 #include "utils/utils.h"
 #include "utils/ft_calloc.c"
+#include "utils/utils_time.c"
 
 void setUp(void)
 {
