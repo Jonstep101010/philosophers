@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:10:16 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 10:16:30 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/19 13:30:18 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 /*
 memset, printf, malloc, free, write, fork, kill,
 exit, pthread_create, pthread_detach, pthread_join,
-usleep, gettimeofday, waitpid, sem_open, sem_close,
-sem_post, sem_wait, sem_unlink
-*/
-/*
-use named semaphores:
--
+usleep, gettimeofday, waitpid,
+
+sem_open, sem_close, sem_post, sem_wait, sem_unlink
 */
 
 static int	wrong_input(void)
@@ -36,8 +33,8 @@ int	main(int ac, char **av)
 	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
 		return (wrong_input());
 	setup(table);
-	// simulation(table);
-	// deconstruct(table);
+	simulation(table);
+	deconstruct(table);
 	return (0);
 
 }

@@ -58,7 +58,7 @@ dkms.conf
 resources/
 Unity/
 .build/
-philo
+philo.out
 chat_*.md
 .build_test/
 build/

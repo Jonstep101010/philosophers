@@ -13,7 +13,8 @@ BUILD_DIR	:= .build
 
 VPATH		:= src/
 
-SRC			:= main.c user_input.c utils_mem.c utils_time.c setup.c
+SRC			:= main.c user_input.c utils_mem.c utils_time.c setup.c \
+				philo_actions.c printing.c routine.c deconstruct.c sim.c
 
 SRCS		:= $(SRC)
 
@@ -25,7 +26,7 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
-CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread #-fsanitize=thread#-Wpedantic
+CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread #-Wpedantic
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 
 MAKEFLAGS	+= --no-print-directory #--silent
@@ -81,7 +82,8 @@ memcheck: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 1001 400 450 3
 
 debug: all#--log-file=valgrind.log  
-	valgrind --tool=helgrind ./$(NAME) 3 80000 200 200
+	valgrind --tool=helgrind --trace-children=yes \
+	./$(NAME) 4 300 200 200
 
 .PHONY: run update re
 # .SILENT:

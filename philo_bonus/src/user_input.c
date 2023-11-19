@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:59:59 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 10:06:27 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:53:03 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ static t_table	*init_ruletable(int ac, char **av)
 
 int	validate_and_init(t_table **input, int ac, char **av)
 {
+	sem_unlink("/forks");
+	sem_unlink("/death");
+	sem_unlink("/print");
 	if (ac > 6 || ac < 5)
 		return (EXIT_FAILURE);
 	if (!is_valid_nbr(ac, av))

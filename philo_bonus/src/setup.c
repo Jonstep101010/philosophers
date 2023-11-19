@@ -6,11 +6,35 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 10:15:12 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/19 13:38:08 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+// @todo cleanup on failure?
+static int	open_semaphores(t_table *table)
+{
+	sem_t	*forks;
+	sem_t	*death;
+	sem_t	*print;
+	// sem_t	*req_eaten;
+	//@todo handle 3 philos
+	forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
+	if (forks == SEM_FAILED)
+		return (EXIT_FAILURE);
+	table->forks = forks;
+	death = sem_open("/death", O_CREAT | O_EXCL, 0666, 1);
+	if (death == SEM_FAILED)
+		return (EXIT_FAILURE);
+	table->death = death;
+	print = sem_open("/print", O_CREAT | O_EXCL, 0666, 1);
+	if (print == SEM_FAILED)
+		return (EXIT_FAILURE);
+	table->print = print;
+	// req_eaten = sem_open("/req_eaten", O_CREAT | O_EXCL, 0666, 1);
+	return (EXIT_SUCCESS);
+}
 
 static void	assign_philos(t_table *table, t_philo *new)
 {
@@ -43,6 +67,7 @@ t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 	if (!new)
 		return (NULL);
 	new->id = id;
+	new->table = table;
 	new->meal_count = meals_to_eat;
 	new->next = new;
 	new->start_time = table->start_time;
@@ -69,5 +94,6 @@ void	*setup(t_table *table)
 			return (NULL);
 	}
 	table->philo_list[table->num_philos - 1]->next = table->philo_list[0];
+	open_semaphores(table);
 	return ((void *)table);
 }
