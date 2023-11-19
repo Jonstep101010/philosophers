@@ -4,6 +4,5 @@
 	"editor.insertSpaces": false,
 	"testExplorer.useNativeTesting": true,
 	"C_Cpp.codeAnalysis.clangTidy.enabled": true,
-	"editor.gotoLocation.multipleDefinitions": "goto",
 	"ceedlingExplorer.debugConfiguration": "ceedlingExplorer"
 }

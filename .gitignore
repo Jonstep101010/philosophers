@@ -57,9 +57,8 @@ dkms.conf
 .editorconfig
 resources/
 Unity/
-philo/.build_test
-philo/.build
-philo/philo
-philo_bonus/.build_test
-philo_bonus/.build
-philo_bonus/philo_bonus
+.build/
+philo
+chat_*.md
+.build_test/
+build/
