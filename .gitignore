@@ -57,8 +57,3 @@ dkms.conf
 .editorconfig
 resources/
 Unity/
-.build/
-philo
-chat_*.md
-.build_test/
-build/
