@@ -27,7 +27,7 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
-CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread -fsanitize=thread #-Wpedantic
+CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread #-fsanitize=thread #-Wpedantic
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 
 MAKEFLAGS	+= --no-print-directory #--silent

@@ -2,4 +2,5 @@
 	"C_Cpp.files.exclude": {
 		"../philo/**": true,
 	},
+	"ceedlingExplorer.projectPath": "./"
 }

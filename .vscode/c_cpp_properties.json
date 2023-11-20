@@ -4,13 +4,15 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/.build_test/vendor/unity/src"
+                "${workspaceFolder}/philo/include",
+                "${workspaceFolder}/philo_bonus/include",
+                "${workspaceFolder}/philo/.build_test/vendor/unity/src",
+                "${workspaceFolder}/philo_bonus/src"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-arm64"
+            // "cStandard": "c89",
+            "cppStandard": "c++14"
         }
     ],
     "version": 4

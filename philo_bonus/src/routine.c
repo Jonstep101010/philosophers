@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/20 13:26:39 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:39:42 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	*monitor_philo(void *arg)
 	// use sem_post(philo->sem) to unlock philo
 	while (1)
 	{
+		sem_wait(philo->sem);
 		if (philo_starving(philo))
 		{
 			sem_post(philo->table->death);
@@ -78,6 +79,7 @@ void	*forked_philo(void *arg)
 		return (NULL);
 	if (pthread_create(&cleanup, NULL, cleanup_philo, philo) != 0)
 		return (NULL);
+	// sem_wait(philo->sem);
 	philo_routine(philo);
 	if (pthread_join(monitor, NULL) != 0)
 		perror("pthread_join monitor");
@@ -102,6 +104,7 @@ void	*philo_routine(void *arg)
 			break ;
 		sleeping(philo);
 		thinking(philo);
+		sem_post(philo->sem);
 	}
 	return (NULL);
 }
