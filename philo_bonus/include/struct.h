@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:12:27 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/19 13:29:16 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:01:39 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef struct s_table
 	sem_t				*forks;
 	sem_t				*death;
 	sem_t				*print;
-	bool				dead;
+	sem_t				*sim_end;
+	sem_t				*req_meals;
 	int					num_philos;
 	int					time_to_die;
 	int					time_to_think;
@@ -46,6 +47,8 @@ struct s_philo
 	t_table				*table;
 	pid_t				pro_id;
 	sem_t				*sem;
+	char				*sem_name;
+	bool				dead;
 	// @follow-up semaphore for each philo using id strjoined
 	// @follow-up optional for philo has eaten?
 	// sem_t				*meal_count;

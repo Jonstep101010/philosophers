@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:10:16 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/19 13:30:18 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:20:58 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ static int	wrong_input(void)
 	return (EXIT_FAILURE);
 }
 
+static void	main_cleanup(t_table *table)
+{
+	deconstruct(table);
+	sem_unlink("/forks");
+	sem_unlink("/death");
+	sem_unlink("/print");
+	sem_unlink("/sim_end");
+	sem_unlink("/req_meals");
+}
+
 int	main(int ac, char **av)
 {
 	t_table	*table;
@@ -34,7 +44,6 @@ int	main(int ac, char **av)
 		return (wrong_input());
 	setup(table);
 	simulation(table);
-	deconstruct(table);
+	main_cleanup(table);
 	return (0);
-
 }

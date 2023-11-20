@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 18:28:38 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/20 08:46:01 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	philo_starving(t_philo *philo)
 		- philo->time_since_meal > philo->table->time_to_die)
 	{
 		pthread_mutex_unlock(&philo->table->death);
-		print_message(philo, "has died");
+		print_message(philo, "died");
 		pthread_mutex_lock(&philo->table->death);
 		philo->table->dead = true;
 		pthread_mutex_unlock(&philo->table->death);

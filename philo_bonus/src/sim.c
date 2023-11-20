@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/19 13:37:25 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:26:54 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	philo_starving(t_philo *philo)
 {
 	// pthread_mutex_lock(&philo->table->death);
-	sem_wait(philo->table->death);
+	// sem_wait(philo->table->death);
 	// if (philo->meal_count == 0)
 	// {
 	// 	// pthread_mutex_unlock(&philo->table->death);
@@ -26,7 +26,7 @@ bool	philo_starving(t_philo *philo)
 		- philo->time_since_meal > philo->table->time_to_die)
 	{
 		// pthread_mutex_unlock(&philo->table->death);
-		philo->table->dead = true;
+		philo->dead = true;
 		sem_post(philo->table->death);
 		print_message(philo, "has died");
 		// pthread_mutex_lock(&philo->table->death);
@@ -65,8 +65,17 @@ bool	philos_have_eaten(t_philo *philo, int *tmp_id)
 	return (false);
 }
 
-#include <wait.h>
 #include <signal.h>
+static void	kill_all_philos(t_philo **list)
+{
+	int	i;
+
+	i = -1;
+	while (list[++i])
+		kill(list[i]->pro_id, SIGSTOP);
+}
+
+// #include <wait.h>
 void	simulation(t_table *table)
 {
 	t_philo	*philo;
@@ -92,7 +101,9 @@ void	simulation(t_table *table)
 		if (philo_starving(philo))
 		{
 			// // pthread_mutex_unlock(&philo->mutex);
-			kill(philo->pro_id, SIGINT);
+			// kill(philo->pro_id, SIGINT);
+			kill_all_philos(table->philo_list);
+			printf("%lu %d died\n", timestamp(table->start_time), philo->id);//philo->id has died
 			break ;
 		}
 		// // pthread_mutex_unlock(&philo->mutex);

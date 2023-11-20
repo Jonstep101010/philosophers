@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:59:59 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/18 12:53:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:14:11 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,15 @@ static t_table	*init_ruletable(int ac, char **av)
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
 	table->time_to_sleep = ft_atol(av[4]);
-	table->meals_to_eat = INT_MIN;
 	if (ac == 6 && ft_atol(av[5]) >= 0 && table->num_philos > 1)
 		table->meals_to_eat = ft_atol(av[5]);
+	else
+		table->meals_to_eat = INT_MIN;
 	return (table);
 }
 
 int	validate_and_init(t_table **input, int ac, char **av)
 {
-	sem_unlink("/forks");
-	sem_unlink("/death");
-	sem_unlink("/print");
 	if (ac > 6 || ac < 5)
 		return (EXIT_FAILURE);
 	if (!is_valid_nbr(ac, av))

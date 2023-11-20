@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/19 13:38:08 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:06:22 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,29 @@
 // @todo cleanup on failure?
 static int	open_semaphores(t_table *table)
 {
-	sem_t	*forks;
-	sem_t	*death;
-	sem_t	*print;
-	// sem_t	*req_eaten;
-	//@todo handle 3 philos
-	forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
-	if (forks == SEM_FAILED)
+	sem_unlink("/forks");
+	sem_unlink("/death");
+	sem_unlink("/print");
+	sem_unlink("/sim_end");
+	table->forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
+	if (table->forks == SEM_FAILED)
 		return (EXIT_FAILURE);
-	table->forks = forks;
-	death = sem_open("/death", O_CREAT | O_EXCL, 0666, 1);
-	if (death == SEM_FAILED)
+	table->death = sem_open("/death", O_CREAT | O_EXCL, 0666, 1);
+	if (table->death == SEM_FAILED)
 		return (EXIT_FAILURE);
-	table->death = death;
-	print = sem_open("/print", O_CREAT | O_EXCL, 0666, 1);
-	if (print == SEM_FAILED)
+	table->print = sem_open("/print", O_CREAT | O_EXCL, 0666, 1);
+	if (table->print == SEM_FAILED)
 		return (EXIT_FAILURE);
-	table->print = print;
-	// req_eaten = sem_open("/req_eaten", O_CREAT | O_EXCL, 0666, 1);
+	table->sim_end = sem_open("/sim_end", O_CREAT | O_EXCL, 0666, 0);
+	if (table->sim_end == SEM_FAILED)
+		return (EXIT_FAILURE);
+	if (table->meals_to_eat > 0)
+	{
+		sem_unlink("/req_meals");
+		table->req_meals = sem_open("/req_meals", O_CREAT | O_EXCL, 0666, table->meals_to_eat);
+		if (table->req_meals == SEM_FAILED)
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -57,6 +62,25 @@ static void	assign_philos(t_table *table, t_philo *new)
 	// pthread_mutex_init(&new->right, NULL);
 }
 
+char	*get_sem_name(int id)
+{
+	char	*sem_id;
+	char	*sem_name;
+
+	sem_id = ft_itoa(id);
+	if (!sem_id)
+		return (NULL);
+	sem_name = ft_strjoin("/sem_", sem_id);
+	if (!sem_name)
+	{
+		free(sem_id);
+		return (NULL);
+	}
+	free(sem_id);
+	sem_unlink(sem_name);
+	return (sem_name);
+}
+
 t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 {
 	t_philo			*new;
@@ -70,8 +94,15 @@ t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 	new->table = table;
 	new->meal_count = meals_to_eat;
 	new->next = new;
+	// @follow-up need to assign start time at the beginning of the simulation
 	new->start_time = table->start_time;
 	assign_philos(table, new);
+	new->sem_name = get_sem_name(id);
+	if (!new->sem_name)
+		return (free(new), NULL);
+	new->sem = sem_open(new->sem_name, O_CREAT | O_EXCL, 0666, 0);
+	if (new->sem == SEM_FAILED)
+		return (free(new->sem_name), free(new), NULL);
 	return (new);
 }
 
@@ -94,6 +125,7 @@ void	*setup(t_table *table)
 			return (NULL);
 	}
 	table->philo_list[table->num_philos - 1]->next = table->philo_list[0];
-	open_semaphores(table);
+	if (open_semaphores(table) == EXIT_FAILURE)
+		return (NULL);
 	return ((void *)table);
 }
