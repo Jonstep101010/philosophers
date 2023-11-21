@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:10:16 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/20 12:20:58 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:05:00 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	main_cleanup(t_table *table)
 	sem_unlink("/death");
 	sem_unlink("/print");
 	sem_unlink("/sim_end");
+	sem_unlink("/sync_start");
 	sem_unlink("/req_meals");
 }
 

@@ -15,7 +15,7 @@ VPATH		:= src/
 
 SRC			:= main.c user_input.c utils_mem.c utils_time.c setup.c \
 				philo_actions.c printing.c routine.c deconstruct.c \
-				sim.c utils_to.c
+				sim.c utils_to.c forked_process.c
 
 SRCS		:= $(SRC)
 

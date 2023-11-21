@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/20 13:06:22 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:06:02 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	open_semaphores(t_table *table)
 	sem_unlink("/death");
 	sem_unlink("/print");
 	sem_unlink("/sim_end");
+	sem_unlink("/sync_start");
 	table->forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
 	if (table->forks == SEM_FAILED)
 		return (EXIT_FAILURE);
@@ -30,6 +31,9 @@ static int	open_semaphores(t_table *table)
 		return (EXIT_FAILURE);
 	table->sim_end = sem_open("/sim_end", O_CREAT | O_EXCL, 0666, 0);
 	if (table->sim_end == SEM_FAILED)
+		return (EXIT_FAILURE);
+	table->sync_start = sem_open("/sync_start", O_CREAT | O_EXCL, 0666, 0);
+	if (table->sync_start == SEM_FAILED)
 		return (EXIT_FAILURE);
 	if (table->meals_to_eat > 0)
 	{

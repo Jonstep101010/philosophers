@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:12:27 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/20 13:01:39 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:03:41 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_table
 	sem_t				*print;
 	sem_t				*sim_end;
 	sem_t				*req_meals;
+	sem_t				*sync_start;
 	int					num_philos;
 	int					time_to_die;
 	int					time_to_think;
