@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:30:31 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:16:19 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,7 @@
 	// 	sem_post(philo->table->death);
 	// 	return (false);
 	// }
-bool	philo_starving(t_philo *philo)
-{
-	// sem_wait(philo->table->death);
-	if (timestamp(philo->start_time)
-		- philo->time_since_meal > philo->table->time_to_die)
-	{
-		philo->dead = true;
-		sem_post(philo->table->death);
-		printf("%lu %d died\n", timestamp(philo->start_time), philo->id);
-		return (true);
-	}
-	// sem_post(philo->table->death);
-	return (false);
-}
+
 /*
 bool	philos_have_eaten(t_philo *philo, int *tmp_id)
 {
@@ -72,17 +59,12 @@ void	simulation(t_table *table)
 	{
 		table->philo_list[i]->pro_id = fork();
 		if (table->philo_list[i]->pro_id == 0)
-		{
 			forked_philo(table->philo_list[i]);
-			sem_wait(philo->table->sim_end);
-		}
 	}
 	i = -1;
-	while (++i < table->num_philos)
-		sem_post(table->sync_start);
-	// sem_post(table->print);
+	sem_post(table->sync_start);
 	i = -1;
-	sem_wait(philo->table->sim_end);
+	// sem_wait(philo->table->sim_end);
 	sem_wait(philo->table->sim_end);
 	while (list[++i])
 		kill(list[i]->pro_id, SIGKILL);

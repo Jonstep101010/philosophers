@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:06:02 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:03:58 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	open_semaphores(t_table *table)
 	table->forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
 	if (table->forks == SEM_FAILED)
 		return (EXIT_FAILURE);
-	table->death = sem_open("/death", O_CREAT | O_EXCL, 0666, 1);
+	table->death = sem_open("/death", O_CREAT | O_EXCL, 0666, 0);
 	if (table->death == SEM_FAILED)
 		return (EXIT_FAILURE);
 	table->print = sem_open("/print", O_CREAT | O_EXCL, 0666, 1);
@@ -99,7 +99,6 @@ t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 	new->meal_count = meals_to_eat;
 	new->next = new;
 	// @follow-up need to assign start time at the beginning of the simulation
-	new->start_time = table->start_time;
 	assign_philos(table, new);
 	new->sem_name = get_sem_name(id);
 	if (!new->sem_name)
@@ -116,7 +115,6 @@ void	*setup(t_table *table)
 
 	if (!table || !table->num_philos)
 		return (NULL);
-	table->start_time = get_time_ms();
 	i = -1;
 	table->philo_list = ft_calloc(table->num_philos + 1, sizeof(t_philo *));
 	if (!table->philo_list)

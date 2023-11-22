@@ -80,11 +80,11 @@ run: all
 	./$(NAME) 4 300 200 200 
 
 memcheck: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 1001 400 450 3
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 50 1001 400 450
 
 debug: all#--log-file=valgrind.log  
 	valgrind --tool=helgrind --trace-children=yes \
-	./$(NAME) 4 800 200 200
+	./$(NAME) 4 300 200 200
 
 .PHONY: run update re
 # .SILENT:

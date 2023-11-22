@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:59:59 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/20 12:14:11 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:35:51 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static t_table	*init_ruletable(int ac, char **av)
 	table = (t_table *)ft_calloc(1, sizeof(t_table));
 	if (!table)
 		return (NULL);
-	table->start_time = get_time_ms();
 	table->num_philos = ft_atol(av[1]);
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
