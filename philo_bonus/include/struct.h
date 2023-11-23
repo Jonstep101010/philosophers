@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:12:27 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/22 16:36:16 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:26:02 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_philo	t_philo;
 typedef struct s_table
 {
 	// time_t				start_time;
+	sem_t				*time_since_meal;
 	sem_t				*forks;
 	sem_t				*death;
 	sem_t				*print;

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/22 17:58:49 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:33:16 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,16 @@ bool	eating(t_philo *philo)
 			return (false);
 		else
 		{
+			sem_wait(philo->table->time_since_meal);
 			philo->time_since_meal = timestamp(philo->start_time);
 			print_message(philo, "is eating");
 			p_sleep(philo->table->time_to_eat);
 			sem_post(philo->table->forks);
+			sem_post(philo->table->time_since_meal);
 		}
 	}
-	if (philo->meal_count == 0)
-		return (false);
+	// if (philo->meal_count == 0)
+	// 	return (false);
 	return (true);
 }
 
