@@ -6,11 +6,12 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/24 15:47:25 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:45:33 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+#include <semaphore.h>
 
 // @todo cleanup on failure?
 static int	open_semaphores(t_table *table)
@@ -20,6 +21,7 @@ static int	open_semaphores(t_table *table)
 	sem_unlink("/print");
 	sem_unlink("/sim_end");
 	sem_unlink("/sync_start");
+	sem_unlink("/time_since_meal");
 	table->forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
 	if (table->forks == SEM_FAILED)
 		return (EXIT_FAILURE);
@@ -104,9 +106,12 @@ t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 	// @follow-up need to assign start time at the beginning of the simulation
 	assign_philos(table, new);
 	new->sem_name = get_sem_name(id);
-	if (!new->sem_name)
+	char	*deathname = get_sem_name(id);
+	new->death_name = ft_strjoin(deathname, "_death");
+	if (!new->sem_name || !new->death_name)
 		return (free(new), NULL);
 	new->sem = sem_open(new->sem_name, O_CREAT | O_EXCL, 0666, 0);
+	new->death = sem_open(new->death_name, O_CREAT | O_EXCL, 0666, 0);
 	if (new->sem == SEM_FAILED)
 		return (free(new->sem_name), free(new), NULL);
 	return (new);

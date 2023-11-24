@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/24 15:57:32 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:30:33 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,41 @@
 	// 	p_sleep(philo->table->time_to_eat + 10);
 	// 	return (false);
 	// }
-static bool	select_forks(t_philo *philo)
-{
-	sem_wait(philo->table->forks);
-	print_message(philo, "has taken a fork");
-	print_message(philo, "has taken a fork");
-	return (true);
-}
+// bool	select_forks(t_philo *philo)
+// {
+// 	return (false);
+// }
 
 bool	eating(t_philo *philo)
 {
-	if (philo)
+	sem_wait(philo->table->forks);
+	if (philo->dead)
 	{
-		if (!select_forks(philo))
-			return (false);
-		else
-		{
-			philo->time_since_meal = timestamp(philo->start_time);
-			print_message(philo, "is eating");
-			p_sleep(philo->table->time_to_eat);
-			sem_post(philo->table->forks);
-			return (true);
-		}
+		// sem_post(philo->table->forks);
+		return (false);
 	}
-	return (false);
-	// if (philo->meal_count == 0)
-	// 	return (false);
+	print_message(philo, "has taken a fork");
+	print_message(philo, "has taken a fork");
+	sem_wait(philo->sem);
+	philo->time_since_meal = timestamp(philo->start_time);
+	sem_post(philo->sem);
+	print_message(philo, "is eating");
+	sem_post(philo->table->forks);
+	p_sleep(philo->table->time_to_eat);
+	return (true);
 }
 
 void	thinking(t_philo *philo)
 {
-	if (!philo)
-		return ;
+	sem_wait(philo->sem);
 	print_message(philo, "is thinking");
+	sem_post(philo->sem);
 }
 
 void	sleeping(t_philo *philo)
 {
-	if (!philo)
-		return ;
+	sem_wait(philo->sem);
 	print_message(philo, "is sleeping");
 	p_sleep(philo->table->time_to_sleep);
+	sem_post(philo->sem);
 }
