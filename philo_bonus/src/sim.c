@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/22 17:16:19 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:14:57 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,10 @@ void	simulation(t_table *table)
 		if (table->philo_list[i]->pro_id == 0)
 			forked_philo(table->philo_list[i]);
 	}
-	i = -1;
 	sem_post(table->sync_start);
-	i = -1;
 	// sem_wait(philo->table->sim_end);
 	sem_wait(philo->table->sim_end);
+	i = -1;
 	while (list[++i])
 		kill(list[i]->pro_id, SIGKILL);
 }
