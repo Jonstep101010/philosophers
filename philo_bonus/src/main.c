@@ -6,12 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:10:16 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/23 19:27:41 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:05:00 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <semaphore.h>
 
 /*
 memset, printf, malloc, free, write, fork, kill,
@@ -36,7 +35,6 @@ static void	main_cleanup(t_table *table)
 	sem_unlink("/sim_end");
 	sem_unlink("/sync_start");
 	sem_unlink("/req_meals");
-	sem_unlink("/time_since_meal");
 }
 
 int	main(int ac, char **av)
