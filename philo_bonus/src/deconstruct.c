@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/24 17:00:19 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:34:36 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	deconstruct(t_table *rules)
 	i = -1;
 	while (++i < rules->num_philos)
 	{
+		// sem_unlink(rules->philo_list[i]->death_name);
+		sem_close(rules->philo_list[i]->sem);
 		sem_unlink(rules->philo_list[i]->sem_name);
+		// free_item(rules->philo_list[i]->death_name);
 		free_item(rules->philo_list[i]->sem_name);
 		free_item(rules->philo_list[i]);
 	}

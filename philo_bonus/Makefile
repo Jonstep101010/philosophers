@@ -27,13 +27,18 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
-CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread #-fsanitize=thread #-Wpedantic
+CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread -fsanitize=thread #-Wpedantic
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 
-MAKEFLAGS	+= --no-print-directory #--silent
+MAKEFLAGS	+= --no-print-directory --silent
 
+ifeq ($(uname -s),Darwin)
 DONE		= printf "\033[0;32m\xE2\x9C\x93\033[0m "
 DONE_NL		= printf "\033[0;32m\xE2\x9C\x93\n\033[0m"
+else
+DONE		= printf "\033[0;32m✓\033[0m "
+DONE_NL		= printf "\033[0;32m✓\033[0m\n\n"
+endif
 
 # ---------------------------------------------------------------------------- #
 #                             building the program                             #
@@ -71,20 +76,14 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 
-update: fclean
-	git stash
-	git pull
-	git stash pop
-
 run: all
 	./$(NAME) 4 300 200 200 
 
 memcheck: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 50 1001 400 450
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 300 200 200
 
 debug: all#--log-file=valgrind.log  
-	valgrind --tool=helgrind --trace-children=yes \
-	./$(NAME) 4 300 200 200
+	valgrind --tool=drd --trace-children=yes --trace-semaphore=yes --log-file=valgrind.log ./$(NAME) 4 300 200 200
 
 .PHONY: run update re
 # .SILENT:

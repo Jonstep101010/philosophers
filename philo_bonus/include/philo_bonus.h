@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:11:06 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/24 18:42:54 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:42:50 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 # include <semaphore.h>
 # include <fcntl.h>
+
+#include <sys/wait.h>
+#include <signal.h>
 
 /* monitoring philos */
 # include <pthread.h>
@@ -37,6 +40,7 @@
 bool	eating(t_philo *philo);
 void	thinking(t_philo *philo);
 void	sleeping(t_philo *philo);
+void	philo_first_action(t_philo *philo);
 void	*philo_routine(void *arg);
 
 /* checks */

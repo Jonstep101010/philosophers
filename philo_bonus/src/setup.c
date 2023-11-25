@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/24 20:45:33 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:18:58 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	open_semaphores(t_table *table)
 	table->sim_end = sem_open("/sim_end", O_CREAT | O_EXCL, 0666, 0);
 	if (table->sim_end == SEM_FAILED)
 		return (EXIT_FAILURE);
-	table->sync_start = sem_open("/sync_start", O_CREAT | O_EXCL, 0666, 0);
+	table->sync_start = sem_open("/sync_start", O_CREAT | O_EXCL, 0644, 0);
 	if (table->sync_start == SEM_FAILED)
 		return (EXIT_FAILURE);
 	table->time_since_meal = sem_open("/time_since_meal", O_CREAT | O_EXCL, 0666, 0);
@@ -106,12 +106,13 @@ t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 	// @follow-up need to assign start time at the beginning of the simulation
 	assign_philos(table, new);
 	new->sem_name = get_sem_name(id);
-	char	*deathname = get_sem_name(id);
-	new->death_name = ft_strjoin(deathname, "_death");
-	if (!new->sem_name || !new->death_name)
+	// char	*deathname = get_sem_name(id);
+	// new->death_name = ft_strjoin(deathname, "_death");
+	// sem_unlink(new->death_name);
+	if (!new->sem_name)
 		return (free(new), NULL);
 	new->sem = sem_open(new->sem_name, O_CREAT | O_EXCL, 0666, 0);
-	new->death = sem_open(new->death_name, O_CREAT | O_EXCL, 0666, 0);
+	// new->death = sem_open(new->death_name, O_CREAT | O_EXCL, 0666, 0);
 	if (new->sem == SEM_FAILED)
 		return (free(new->sem_name), free(new), NULL);
 	return (new);
@@ -131,10 +132,15 @@ void	*setup(t_table *table)
 	while (++i < table->num_philos)
 	{
 		table->philo_list[i] = create_philo(table, i + 1, table->meals_to_eat);
-		if (!table->philo_list[i])
+		if (!table->philo_list[i] && i != table->num_philos - 1)
 			return (NULL);
+		table->philo_list[i]->next = table->philo_list[0];
 	}
-	table->philo_list[table->num_philos - 1]->next = table->philo_list[0];
+	// @audit remove -1 ?
+	if (table->num_philos > 1)
+		table->philo_list[0]->next = table->philo_list[1];
+	if (table->num_philos > 2)
+		table->philo_list[i - 2]->next = table->philo_list[i - 1];
 	if (open_semaphores(table) == EXIT_FAILURE)
 		return (NULL);
 	return ((void *)table);
