@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/26 16:07:18 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:07:58 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,18 @@ void	eating(t_philo *philo)
 	sem_post(philo->sem);
 	print_message(philo, "has taken a fork");
 	print_message(philo, "has taken a fork");
+	print_message(philo, "is eating");
+	p_sleep(philo->table->time_to_eat);
 	sem_wait(philo->sem);
 	philo->time_since_meal = timestamp(philo->start_time);
 	sem_post(philo->sem);
-	print_message(philo, "is eating");
-	p_sleep(philo->table->time_to_eat);
 	sem_post(philo->table->forks);
 }
 
 void	thinking(t_philo *philo)
 {
 	print_message(philo, "is thinking");
+	p_sleep(1);
 }
 
 void	sleeping(t_philo *philo)

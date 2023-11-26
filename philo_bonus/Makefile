@@ -15,7 +15,7 @@ VPATH		:= src/
 
 SRC			:= main.c user_input.c utils_mem.c utils_time.c setup.c \
 				philo_actions.c printing.c routine.c deconstruct.c \
-				sim.c utils_to.c forked_process.c
+				sim.c utils_to.c forked_process.c threads.c
 
 SRCS		:= $(SRC)
 
@@ -27,7 +27,7 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
-CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread -fsanitize=thread #-Wpedantic
+CFLAGS		?= -g3 -Wall -Wextra -Werror -pthread #-fsanitize=thread -O1#-Wpedantic
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 
 MAKEFLAGS	+= --no-print-directory --silent
@@ -80,10 +80,10 @@ run: all
 	./$(NAME) 4 300 200 200 
 
 memcheck: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 4 300 200 200
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 5 800 200 200
 
-debug: all#--log-file=valgrind.log  
-	valgrind --tool=drd --trace-children=yes --trace-semaphore=yes --log-file=valgrind.log ./$(NAME) 4 300 200 200
+debug: all#--log-file=valgrind.log   
+	valgrind --tool=drd --trace-children=yes --trace-semaphore=yes -s --log-file=valgrind.log ./$(NAME) 5 800 200 200
 
 .PHONY: run update re
 # .SILENT:
