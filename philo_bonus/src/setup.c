@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/25 17:18:58 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:56:20 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ void	*setup(t_table *table)
 			return (NULL);
 		table->philo_list[i]->next = table->philo_list[0];
 	}
-	// @audit remove -1 ?
 	if (table->num_philos > 1)
 		table->philo_list[0]->next = table->philo_list[1];
 	if (table->num_philos > 2)

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:11:06 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/26 14:39:36 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/26 15:02:01 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ void	*philo_routine(t_philo *philo);
 
 /* checks */
 void	philo_starving(t_philo *philo);
+
+/* threads (in process)*/
+void	*monitor_philo(void *arg);
+void	*cleanup_philo(void *arg);
 
 /* philo forked process */
 void	*forked_philo(void *arg);

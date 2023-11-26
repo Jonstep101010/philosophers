@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/26 14:28:42 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:53:58 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ void	*philo_routine(t_philo *philo)
 		thinking(philo);
 		sem_wait(philo->sem);
 	}
-	sem_post(philo->death);
 	return (NULL);
 }
