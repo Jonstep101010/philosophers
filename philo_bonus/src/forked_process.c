@@ -6,29 +6,29 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:43:09 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/25 17:35:26 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:43:03 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 #include <semaphore.h>
 
-bool	philo_starving(t_philo *philo)
+void	philo_starving(t_philo *philo)
 {
-	sem_wait(philo->table->print);
-	sem_post(philo->sem);
-	if (timestamp(philo->start_time)
-		- philo->time_since_meal > philo->table->time_to_die)
-	{
-		printf("%lu %d died\n", timestamp(philo->start_time), philo->id);
-		philo->dead = true;
-		sem_wait(philo->sem);
-		// sem_post(philo->sem);
-		return (true);
-	}
 	sem_wait(philo->sem);
-	sem_post(philo->table->print);
-	return (false);
+	time_t	philo_time_since_meal = timestamp(philo->start_time) - philo->time_since_meal;
+	if (philo_time_since_meal >= philo->table->time_to_die)
+	{
+		sem_wait(philo->table->print);
+		philo->dead = true;
+		printf("%lu %d died\n", timestamp(philo->start_time), philo->id);
+		sem_post(philo->table->death);
+		sem_wait(philo->sem);
+	}
+	else
+	{
+		sem_post(philo->sem);
+	}
 }
 
 void	*monitor_philo(void *arg)
@@ -54,7 +54,6 @@ void	*monitor_philo(void *arg)
 			break;
 		sem_post(philo->sem);
 	}
-	sem_post(philo->table->death);
 	sem_post(philo->table->death);
 	return (NULL);
 }

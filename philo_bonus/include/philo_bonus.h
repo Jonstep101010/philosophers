@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:11:06 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/25 15:42:50 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:39:36 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ bool	eating(t_philo *philo);
 void	thinking(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	philo_first_action(t_philo *philo);
-void	*philo_routine(void *arg);
+void	*philo_routine(t_philo *philo);
 
 /* checks */
-bool	philo_starving(t_philo *philo);
+void	philo_starving(t_philo *philo);
 
 /* philo forked process */
 void	*forked_philo(void *arg);
