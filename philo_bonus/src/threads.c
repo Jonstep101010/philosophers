@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:20 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:47:15 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:15:20 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	philo_starving(t_philo *philo)
 {
 	sem_wait(philo->sem);
 	time_t	philo_time_since_meal = timestamp(philo->start_time) - philo->time_since_meal;
-	if (philo_time_since_meal >= philo->table->time_to_die)
+	if (philo_time_since_meal >= philo->table->time_to_die && !philo->dead)
 	{
 		sem_wait(philo->table->print);
 		philo->dead = true;
 		printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n", timestamp(philo->start_time), philo->id);
+		sem_post(philo->sem);
 		sem_post(philo->table->death);
-		// sem_wait(philo->sem);
 	}
 	else
 	{
@@ -38,7 +38,7 @@ void	*monitor_philo(void *arg)
 	philo = (t_philo *)arg;
 	if (!philo)
 		return (NULL);
-	philo->dead = false;
+	printf("%d from thread\n", getpid());
 	philo->time_since_meal = 0;
 	philo->start_time = get_time_ms();
 	sem_wait(philo->table->sync_start);
@@ -50,11 +50,15 @@ void	*monitor_philo(void *arg)
 		philo_starving(philo);
 		sem_wait(philo->sem);
 		if (philo->dead)
+		{
+			printf("monitor knows about death: %d\n", philo->id);
+			sem_post(philo->sem);
 			break;
+		}
 		sem_post(philo->sem);
 	}
-	sem_wait(philo->table->death);
-	sem_post(philo->table->death);
+	// sem_wait(philo->table->death);
+	// sem_post(philo->table->death);
 	return (NULL);
 }
 
@@ -65,8 +69,19 @@ void	*cleanup_philo(void *arg)
 	philo = (t_philo *)arg;
 	if (!philo)
 		return (NULL);
+	printf("%d from thread\n", getpid());
 	sem_wait(philo->table->death);
+	printf("global death: %d\n", philo->id);
+	sem_wait(philo->sem);
+	philo->dead = true;
+	printf("death did happen: %d\n", philo->id);
+	sem_post(philo->sem);
+	// sem_wait(philo->sem);
+	printf("death of %d\n", philo->id);
+	sem_post(philo->table->death);
+	// sem_wait(philo->table->death);
 	sem_post(philo->table->death);
 	sem_post(philo->table->sim_end);
+	printf("closed thread for %d\n", philo->id);
 	return (NULL);
 }
