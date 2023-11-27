@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/27 13:53:38 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:13:32 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 	// @follow-up need to assign start time at the beginning of the simulation
 	assign_philos(table, new);
 	new->sem_name = get_sem_name(id);
+	new->sim_end = false;
 	// char	*deathname = get_sem_name(id);
 	// new->death_name = ft_strjoin(deathname, "_death");
 	// sem_unlink(new->death_name);

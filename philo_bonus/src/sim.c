@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/27 13:46:01 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:35:17 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	simulation(t_table *table)
 		table->philo_list[i]->pro_id = fork();
 		if (table->philo_list[i]->pro_id == 0)
 		{
-			// printf("child %d, pid:%d\n", i, getpid());
 			forked_philo(table->philo_list[i]);
 			exit(0);
 		}
@@ -40,15 +39,14 @@ void	simulation(t_table *table)
 	// need to add checking for meal_count @follow-up
 	p_sleep(table->time_to_die);
 	sem_wait(table->death);
-	sem_post(table->death);
-	p_sleep(10);
-	sem_post(table->print);
+	i = -1;
+	while (++i < table->num_philos)
+		sem_post(philo->table->sim_end);
+	p_sleep(100);
 	i = -1;
 	while (++i < table->num_philos)
 		waitpid(-1, NULL, 0);
-	// waitpid(-1, NULL, 0);
-	while (++i < table->num_philos)
-		waitpid(-1, NULL, 0);
-		// kill(table->philo_list[i]->pro_id, SIGKILL);
-
+	// i = -1;
+	// while (++i < table->num_philos)
+	// 	waitpid(-1, NULL, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:12:27 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/27 13:53:14 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:10:54 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ struct s_philo
 	t_table				*table;
 	pid_t				pro_id;
 	sem_t				*sem;
+	bool				sim_end;
 	// sem_t				*death;
 	char				*death_name;
 	char				*sem_name;
