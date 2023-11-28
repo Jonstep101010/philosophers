@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:20 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/27 19:36:30 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 08:46:41 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	philo_starving(t_philo *philo)
 	{
 		philo->dead = true;
 		sem_post(philo->sem);
-		sem_post(philo->table->death);
 		return ;
 	}
 	else
@@ -54,6 +53,7 @@ void	*monitor_philo(void *arg)
 		{
 			printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n", timestamp(philo->start_time), philo->id);
 			sem_post(philo->sem);
+			sem_post(philo->table->death);
 			return (NULL);
 		}
 		sem_post(philo->sem);
@@ -70,6 +70,5 @@ void	*cleanup_philo(void *arg)
 		return (NULL);
 	sem_wait(philo->table->sim_end);
 	sem_wait(philo->sem);
-	deconstruct(philo->table);
 	exit(0);
 }

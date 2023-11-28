@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/27 11:11:22 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 08:44:17 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	*philo_routine(t_philo *philo)
 		if (philo->dead)
 			break;
 	}
-	printf("philo knows he's dead: %d\n", philo->id);
 	sem_post(philo->sem);
 	return (NULL);
 }
