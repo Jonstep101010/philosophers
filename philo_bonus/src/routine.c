@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/28 08:44:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:09:45 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 #include <semaphore.h>
 #include <signal.h>
 
-void	philo_first_action(t_philo *philo)
+bool	philo_first_action(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
-		print_message(philo, "is sleeping");
-		p_sleep(philo->table->time_to_sleep);
+		if (!sleeping(philo))
+			return (false);
 	}
 	else
 	{
-		eating(philo);
-		print_message(philo, "is sleeping");
-		p_sleep(philo->table->time_to_sleep);
+		if (!eating(philo))
+			return (false);
+		if (!sleeping(philo))
+			return (false);
 	}
+	return (true);
 }
 
 void	*philo_routine(t_philo *philo)
@@ -35,12 +37,13 @@ void	*philo_routine(t_philo *philo)
 	while (philo->dead == false)
 	{
 		sem_post(philo->sem);
-		eating(philo);
-		sleeping(philo);
-		thinking(philo);
+		if (!eating(philo))
+			break ;
+		if (!sleeping(philo))
+			break ;
+		if (!thinking(philo))
+			break ;
 		sem_wait(philo->sem);
-		if (philo->dead)
-			break;
 	}
 	sem_post(philo->sem);
 	return (NULL);

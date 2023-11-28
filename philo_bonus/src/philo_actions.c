@@ -6,14 +6,25 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/27 11:18:47 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:08:48 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 #include <semaphore.h>
 
-void	eating(t_philo *philo)
+bool	print_eating(t_philo *philo)
+{
+	if (!print_message(philo, "has taken a fork"))
+		return (false);
+	if (!print_message(philo, "has taken a fork"))
+		return (false);
+	if (!print_message(philo, "is eating"))
+		return (false);
+	return (true);
+}
+
+bool	eating(t_philo *philo)
 {
 	sem_wait(philo->sem);
 	if (philo->table->num_philos == 1)
@@ -21,40 +32,44 @@ void	eating(t_philo *philo)
 		sem_post(philo->sem);
 		print_message(philo, "has taken a fork");
 		p_sleep(philo->table->time_to_die + 10);
-		return ;
+		return (false);
 	}
 	sem_post(philo->sem);
 	sem_wait(philo->sem);
 	if (philo->dead)
 	{
 		sem_post(philo->sem);
-		return ;
+		return (false);
 	}
 	sem_post(philo->sem);
 	sem_wait(philo->table->forks);
-	print_message(philo, "has taken a fork");
-	print_message(philo, "has taken a fork");
-	print_message(philo, "is eating");
+	if (!print_eating(philo))
+		return (false);
 	p_sleep(philo->table->time_to_eat);
 	sem_wait(philo->sem);
 	if (philo->dead)
 	{
 		sem_post(philo->sem);
-		return ;
+		return (false);
 	}
 	philo->time_since_meal = timestamp(philo->start_time);
 	sem_post(philo->sem);
 	sem_post(philo->table->forks);
+	return (true);
 }
 
-void	thinking(t_philo *philo)
+bool	thinking(t_philo *philo)
 {
-	print_message(philo, "is thinking");
+	if (!print_message(philo, "is thinking"))
+		return (false);
 	p_sleep(1);
+	return (true);
 }
 
-void	sleeping(t_philo *philo)
+bool	sleeping(t_philo *philo)
 {
-	print_message(philo, "is sleeping");
+	if (!print_message(philo, "is sleeping"))
+		return (false);
 	p_sleep(philo->table->time_to_sleep);
+	return (true);
 }
