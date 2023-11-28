@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:43:09 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/28 11:32:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:02:32 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	*forked_philo(t_philo *philo, t_table *table)
 	philo_routine(philo);
 	if (pthread_join(monitor, NULL) != 0)
 		return (NULL);
-	if (pthread_join(cleanup, NULL) == 0)
+	if (pthread_detach(cleanup) == 0)
 	{
-		sem_wait(philo->table->print);
-		p_sleep(10);
-		sem_post(philo->table->print);
-		waitpid(-1, NULL, 0);
+		// sem_wait(philo->table->print);
+		// p_sleep(10);
+		// sem_post(philo->table->print);
+		// waitpid(-1, NULL, 0);
 		forked_cleanup(table);
 		exit(0);
 	}

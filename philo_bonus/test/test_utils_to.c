@@ -60,4 +60,7 @@ void	test_strjoin_number_id(void) {
 	}
 }
 
+void	test_something_need_to_implement(void) {
+	TEST_IGNORE_MESSAGE("Need to implement");
+}
 // #endif // TEST
