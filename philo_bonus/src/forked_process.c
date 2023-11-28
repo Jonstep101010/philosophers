@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:43:09 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/28 10:58:53 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:32:03 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,18 @@
 #include "struct.h"
 #include <semaphore.h>
 
-void	*forked_philo(t_philo *philo)
+void	forked_cleanup(t_table *table)
+{
+	deconstruct(table);
+	sem_unlink("/forks");
+	sem_unlink("/death");
+	sem_unlink("/print");
+	sem_unlink("/sim_end");
+	sem_unlink("/sync_start");
+	sem_unlink("/req_meals");
+}
+
+void	*forked_philo(t_philo *philo, t_table *table)
 {
 	pthread_t	monitor;
 	pthread_t	cleanup;
@@ -30,16 +41,16 @@ void	*forked_philo(t_philo *philo)
 	philo_first_action(philo);
 	sem_wait(philo->sem);
 	philo_routine(philo);
-	printf("test\n");
 	if (pthread_join(monitor, NULL) != 0)
 		return (NULL);
-	printf("test1\n");
 	if (pthread_join(cleanup, NULL) == 0)
 	{
-		printf("test2\n");
+		sem_wait(philo->table->print);
+		p_sleep(10);
+		sem_post(philo->table->print);
 		waitpid(-1, NULL, 0);
+		forked_cleanup(table);
 		exit(0);
-		return (NULL);
 	}
 	else
 		exit(-1);
