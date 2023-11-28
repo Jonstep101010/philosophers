@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 07:12:35 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/28 10:01:37 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:52:29 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ bool	print_message(t_philo *philo, char *msg)
 	sem_wait(philo->table->print);
 	if (!philo->dead)
 		printf("%lu\t%d %s\n", timestamp(philo->start_time), philo->id, msg);
+	else
+		return (false);
 	sem_post(philo->sem);
 	sem_post(philo->table->print);
 	return (true);

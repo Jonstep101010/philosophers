@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:48 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:01:07 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ bool	thinking(t_philo *philo)
 {
 	if (!print_message(philo, "is thinking"))
 		return (false);
-	p_sleep(1);
 	return (true);
 }
 
