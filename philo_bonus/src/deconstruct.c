@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/28 09:21:46 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:28:54 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	deconstruct(t_table *rules)
 	sem_close(rules->print);
 	sem_close(rules->sim_end);
 	sem_close(rules->sync_start);
-	sem_close(rules->time_since_meal);
+	sem_close(rules->req_meals);
 	if (rules->meals_to_eat >= 0)
 		sem_close(rules->req_meals);
 	free_item(rules);

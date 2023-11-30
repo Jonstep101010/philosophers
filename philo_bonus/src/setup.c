@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/27 18:13:32 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:57:39 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,10 @@ static int	open_semaphores(t_table *table)
 	table->sync_start = sem_open("/sync_start", O_CREAT | O_EXCL, 0644, 0);
 	if (table->sync_start == SEM_FAILED)
 		return (EXIT_FAILURE);
-	table->time_since_meal = sem_open("/time_since_meal", O_CREAT | O_EXCL, 0666, 0);
-	if (table->time_since_meal == SEM_FAILED)
+	sem_unlink("/req_meals");
+	table->req_meals = sem_open("/req_meals", O_CREAT | O_EXCL, 0666, 0);
+	if (table->req_meals == SEM_FAILED)
 		return (EXIT_FAILURE);
-	if (table->meals_to_eat > 0)
-	{
-		sem_unlink("/req_meals");
-		table->req_meals = sem_open("/req_meals", O_CREAT | O_EXCL, 0666, table->meals_to_eat);
-		if (table->req_meals == SEM_FAILED)
-			return (EXIT_FAILURE);
-	}
 	return (EXIT_SUCCESS);
 }
 
@@ -90,7 +84,7 @@ char	*get_sem_name(int id)
 	return (sem_name);
 }
 
-t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
+t_philo	*create_philo(t_table *table, int id)
 {
 	t_philo			*new;
 
@@ -101,7 +95,7 @@ t_philo	*create_philo(t_table *table, int id, int meals_to_eat)
 		return (NULL);
 	new->id = id;
 	new->table = table;
-	new->meal_count = meals_to_eat;
+	new->meal_count = 0;
 	new->next = new;
 	new->dead = false;
 	// @follow-up need to assign start time at the beginning of the simulation
@@ -133,7 +127,7 @@ void	*setup(t_table *table)
 	table->philo_list[table->num_philos] = NULL;
 	while (++i < table->num_philos)
 	{
-		table->philo_list[i] = create_philo(table, i + 1, table->meals_to_eat);
+		table->philo_list[i] = create_philo(table, i + 1);
 		if (!table->philo_list[i] && i != table->num_philos - 1)
 			return (NULL);
 		table->philo_list[i]->next = table->philo_list[0];

@@ -2,5 +2,7 @@
 	"C_Cpp.files.exclude": {
 		"../philo/**": true,
 	},
-	"ceedlingExplorer.projectPath": "./"
+	"ceedlingExplorer.projectPath": "./",
+	"editor.gotoLocation.multipleDefinitions": "goto",
+	"editor.gotoLocation.multipleTypeDefinitions": "goto"
 }

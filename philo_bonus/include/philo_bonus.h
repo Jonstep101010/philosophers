@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:11:06 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/28 11:31:35 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:20:31 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@
 # define SEM_ERR -1
 
 /*philo actions*/
-bool	eating(t_philo *philo);
-bool	thinking(t_philo *philo);
-bool	sleeping(t_philo *philo);
-bool	philo_first_action(t_philo *philo);
+void	eating(t_philo *philo);
+void	thinking(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	philo_first_action(t_philo *philo);
 void	*philo_routine(t_philo *philo);
 
 /* checks */
@@ -49,6 +49,7 @@ bool	philo_starving(t_philo *philo);
 /* threads (in process)*/
 void	*monitor_philo(void *arg);
 void	*cleanup_philo(void *arg);
+void	*forked_cleanup(t_table *table);
 
 /* philo forked process */
 void	*forked_philo(t_philo *philo, t_table *table);
