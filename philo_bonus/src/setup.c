@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/30 16:57:39 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:21:38 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,14 @@ t_philo	*create_philo(t_table *table, int id)
 	new->meal_count = 0;
 	new->next = new;
 	new->dead = false;
-	// @follow-up need to assign start time at the beginning of the simulation
 	assign_philos(table, new);
 	new->sem_name = get_sem_name(id);
 	new->sim_end = false;
-	// char	*deathname = get_sem_name(id);
-	// new->death_name = ft_strjoin(deathname, "_death");
-	// sem_unlink(new->death_name);
+	new->start_time = 0;
+	new->sim_end = false;
 	if (!new->sem_name)
 		return (free(new), NULL);
 	new->sem = sem_open(new->sem_name, O_CREAT | O_EXCL, 0666, 0);
-	// new->death = sem_open(new->death_name, O_CREAT | O_EXCL, 0666, 0);
 	if (new->sem == SEM_FAILED)
 		return (free(new->sem_name), free(new), NULL);
 	return (new);
@@ -121,10 +118,9 @@ void	*setup(t_table *table)
 	if (!table || !table->num_philos)
 		return (NULL);
 	i = -1;
-	table->philo_list = ft_calloc(table->num_philos + 1, sizeof(t_philo *));
+	table->philo_list = ft_calloc(table->num_philos, sizeof(t_philo *));
 	if (!table->philo_list)
 		return (NULL);
-	table->philo_list[table->num_philos] = NULL;
 	while (++i < table->num_philos)
 	{
 		table->philo_list[i] = create_philo(table, i + 1);

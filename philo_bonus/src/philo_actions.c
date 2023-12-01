@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/30 16:21:14 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:25:12 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void	eating(t_philo *philo)
 {
+	if (!philo || !philo->sem)
+		return ;
 	if (philo->table->num_philos == 1)
 	{
 		print_message(philo, "has taken a fork");
@@ -33,16 +35,4 @@ void	eating(t_philo *philo)
 	sem_post(philo->sem);
 	p_sleep(philo->table->time_to_eat);
 	sem_post(philo->table->forks);
-}
-
-void	thinking(t_philo *philo)
-{
-	print_message(philo, "is thinking");
-	p_sleep(1);
-}
-
-void	sleeping(t_philo *philo)
-{
-	print_message(philo, "is sleeping");
-	p_sleep(philo->table->time_to_sleep);
 }

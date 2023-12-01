@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/30 17:28:54 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:26:21 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	deconstruct(t_table *rules)
 	int	i;
 
 	i = -1;
+	if (!rules)
+		return ;
 	while (++i < rules->num_philos)
 	{
 		sem_close(rules->philo_list[i]->sem);

@@ -6,26 +6,38 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:43:09 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/30 14:40:49 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:15:19 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 #include "struct.h"
+#include <pthread.h>
 #include <semaphore.h>
 #include <stdio.h>
 
-void	*forked_cleanup(t_table *table)
+void	*forked_cleanup(t_table *rules)
 {
-	if (!table)
+	if (!rules || !rules->philo_list)
 		return (NULL);
-	deconstruct(table);
-	// sem_unlink("/forks");
-	// sem_unlink("/death");
-	// sem_unlink("/print");
-	// sem_unlink("/sim_end");
-	// sem_unlink("/sync_start");
-	// sem_unlink("/req_meals");
+	int	i;
+
+	i = -1;
+	while (++i < rules->num_philos)
+	{
+		sem_close(rules->philo_list[i]->sem);
+		sem_unlink(rules->philo_list[i]->sem_name);
+		free_item(rules->philo_list[i]->sem_name);
+		free_item(rules->philo_list[i]);
+	}
+	sem_close(rules->forks);
+	sem_close(rules->death);
+	sem_close(rules->print);
+	sem_close(rules->req_meals);
+	sem_close(rules->sim_end);
+	sem_close(rules->sync_start);
+	free_item(rules->philo_list);
+	free_item(rules);
 	return (NULL);
 }
 
@@ -45,9 +57,15 @@ void	*forked_philo(t_philo *philo, t_table *table)
 	philo_first_action(philo);
 	sem_wait(philo->sem);
 	philo_routine(philo);
-	if (pthread_detach(monitor) != 0)
+	if (pthread_join(monitor, NULL) != 0)
 		printf("Error joining monitor thread\n");
-	if (pthread_detach(cleanup) != 0)
+	printf("joined monitor thread: %d\n", philo->id);
+	if (pthread_join(cleanup, NULL) != 0)
 		printf("Error detaching cleanup thread\n");
+	printf("joined cleanup thread: %d\n", philo->id);
+	sem_post(philo->table->print);
+	sem_wait(philo->sem);
+	printf("exiting %d \n", philo->id);
+	forked_cleanup(philo->table);
 	exit(0);
 }

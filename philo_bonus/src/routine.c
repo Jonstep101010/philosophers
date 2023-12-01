@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/30 15:26:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:13:36 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,29 @@ void	philo_first_action(t_philo *philo)
 {
 	if (philo->id % 2 != 0)
 	{
-		sleeping(philo);
+		print_message(philo, "is sleeping");
+		p_sleep(philo->table->time_to_sleep);
 	}
 	else
 	{
 		eating(philo);
-		sleeping(philo);
+		print_message(philo, "is sleeping");
+		p_sleep(philo->table->time_to_sleep);
 	}
 }
 
 void	*philo_routine(t_philo *philo)
 {
+	if (!philo || !philo->sem)
+		return (NULL);
 	while (philo->dead == false)
 	{
 		sem_post(philo->sem);
 		eating(philo);
-		sleeping(philo);
-		thinking(philo);
+		print_message(philo, "is sleeping");
+		p_sleep(philo->table->time_to_sleep);
+		print_message(philo, "is thinking");
+		p_sleep(1);
 		sem_wait(philo->sem);
 	}
 	sem_post(philo->sem);

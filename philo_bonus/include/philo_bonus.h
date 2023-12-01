@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:11:06 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/30 15:20:31 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:47:15 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	philo_first_action(t_philo *philo);
 void	*philo_routine(t_philo *philo);
 
 /* checks */
-bool	philo_starving(t_philo *philo);
+// bool	philo_starving(t_philo *philo);
 
 /* threads (in process)*/
 void	*monitor_philo(void *arg);
@@ -67,6 +67,7 @@ time_t	timestamp(time_t start_time);
 void	*ft_calloc(size_t nitems, size_t size);
 int	validate_and_init(t_table **input, int ac, char **av);
 
+void	free_item(void *tofree);
 void	deconstruct(t_table *rules);
 
 /*helpers*/

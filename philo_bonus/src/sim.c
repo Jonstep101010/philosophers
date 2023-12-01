@@ -30,11 +30,15 @@ static void	*main_monitor(void *arg)
 	{
 		sem_wait(table->req_meals);
 		if (table->philo_list[0]->dead == true)
-			break ;
+			return (NULL);
 		meals_eaten++;
 	}
+	if (meals_eaten == table->num_philos - 1)
+	{
+		sem_post(table->death);
 	sem_wait(table->print);
-	sem_post(table->death);
+		printf("\033[1;32m\033[1m%lu\tAll philosophers have eaten %d meals\033[0m\n", timestamp(table->philo_list[0]->start_time), table->meals_to_eat);
+	}
 	return (NULL);
 }
 
@@ -64,6 +68,7 @@ void	simulation(t_table *table)
 	// need to add checking for meal_count @follow-up
 	p_sleep(table->time_to_die);
 	sem_wait(table->death);
+	sem_post(table->death);
 	table->philo_list[0]->dead = true;
 	sem_post(table->req_meals);
 	i = -1;
