@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/30 17:26:57 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/01 18:40:49 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	*main_monitor(void *arg)
 
 	table = (t_table *)arg;
 	meals_eaten = 0;
+	sem_wait(table->sync_start);
+	sem_post(table->sync_start);
 	if (table->meals_to_eat == INT_MIN)
 		return (NULL);
 	sem_wait(table->req_meals);
@@ -33,15 +35,16 @@ static void	*main_monitor(void *arg)
 			return (NULL);
 		meals_eaten++;
 	}
-	if (meals_eaten == table->num_philos - 1)
+	if (meals_eaten == table->num_philos - 1 && table->philo_list[0]->dead == false)
 	{
 		sem_post(table->death);
-	sem_wait(table->print);
+		sem_wait(table->print);
 		printf("\033[1;32m\033[1m%lu\tAll philosophers have eaten %d meals\033[0m\n", timestamp(table->philo_list[0]->start_time), table->meals_to_eat);
 	}
 	return (NULL);
 }
 
+#include <stdio.h>
 void	simulation(t_table *table)
 {
 	t_philo	*philo;
@@ -72,14 +75,20 @@ void	simulation(t_table *table)
 	table->philo_list[0]->dead = true;
 	sem_post(table->req_meals);
 	i = -1;
-	if (pthread_join(monitor_meals, NULL) != 0)
-		printf("Error joining main monitor thread\n");
 	while (++i < table->num_philos)
 	{
 		sem_post(philo->table->sim_end);
 	}
-	p_sleep(100);
+	// p_sleep(100);
 	i = -1;
 	while (++i < table->num_philos)
 		waitpid(-1, NULL, 0);
+	i = -1;
+	while (++i < table->num_philos)
+		sem_post(table->req_meals);
+	if (pthread_join(monitor_meals, NULL) != 0)
+		printf("Error joining main monitor thread\n");
+	// i = -1;
+	// while (++i < table->num_philos)
+	// 	kill(table->philo_list[i]->pro_id, SIGSTOP);
 }
