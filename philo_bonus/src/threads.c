@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:20 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/01 18:13:59 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:18:34 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,17 @@
 
 void	philo_starving(t_philo *philo)
 {
-	time_t	philo_time_since_meal;
 	if (!philo || !philo->sem)
 		return ;
 	sem_wait(philo->sem);
-	philo_time_since_meal = timestamp(philo->start_time) - philo->time_since_meal;
-	if (philo_time_since_meal > philo->table->time_to_die && !philo->dead)
+	if (timestamp(philo->start_time) - philo->time_since_meal > philo->table->time_to_die && !philo->dead)
 	{
-		printf("still alive: %d\n", philo->id);
 		sem_post(philo->sem);
 		sem_post(philo->table->death);
 		sem_wait(philo->table->print);
 		sem_wait(philo->sem);
 		if (philo->sim_end)
 		{
-			printf("detected sim end: %d\n", philo->id);
 			sem_post(philo->table->print);
 			p_sleep(1);
 			sem_post(philo->sem);
@@ -84,7 +80,7 @@ void	*cleanup_philo(void *arg)
 	sem_wait(philo->sem);
 	if (philo->table->meals_to_eat != INT_MIN && philo->meal_count >= philo->table->meals_to_eat && !philo->sim_end && !philo->dead)
 	{
-		printf("cleanup of optional arg: %d\n", philo->id);
+
 		philo->sim_end = true;
 		philo->dead = true;
 		sem_post(philo->sem);
@@ -98,12 +94,7 @@ void	*cleanup_philo(void *arg)
 		philo->sim_end = false;
 		if (philo->table->num_philos % 2 == 0)
 			philo->dead = true;
-		//@audit should be possible to remove this
-		// if (philo->table->meals_to_eat != INT_MIN && philo->table->num_philos % 2 != 0)
-			// philo->dead = true;
 		sem_post(philo->sem);
-		// @audit not sure about this ...
-		// sem_post(philo->table->print);
 		sem_post(philo->table->print);
 		return (NULL);
 	}
@@ -111,6 +102,5 @@ void	*cleanup_philo(void *arg)
 	philo->sim_end = true;
 	sem_post(philo->sem);
 	p_sleep(10);
-	printf("philo check 2: %d\n", philo->id);
 	return (NULL);
 }
