@@ -6,15 +6,16 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:20 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 17:18:34 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:45:28 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 #include <semaphore.h>
 #include <unistd.h>
+#include <limits.h>
 
-void	philo_starving(t_philo *philo)
+static void	philo_starving(t_philo *philo)
 {
 	if (!philo || !philo->sem)
 		return ;
@@ -68,8 +69,19 @@ void	*monitor_philo(void *arg)
 	return (NULL);
 }
 
-#include <limits.h>
-void	*cleanup_philo(void *arg)
+static void	*post_dead_philo(t_philo *philo)
+{
+	sem_wait(philo->table->death);
+	printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n", timestamp(philo->start_time), philo->id);
+	philo->sim_end = false;
+	if (philo->table->num_philos % 2 == 0)
+		philo->dead = true;
+	sem_post(philo->sem);
+	sem_post(philo->table->print);
+	return (NULL);
+}
+
+void	*wait_philo_exit(void *arg)
 {
 	t_philo	*philo;
 
@@ -80,7 +92,6 @@ void	*cleanup_philo(void *arg)
 	sem_wait(philo->sem);
 	if (philo->table->meals_to_eat != INT_MIN && philo->meal_count >= philo->table->meals_to_eat && !philo->sim_end && !philo->dead)
 	{
-
 		philo->sim_end = true;
 		philo->dead = true;
 		sem_post(philo->sem);
@@ -88,16 +99,7 @@ void	*cleanup_philo(void *arg)
 		return (NULL);
 	}
 	if (timestamp(philo->start_time) - philo->time_since_meal > philo->table->time_to_die && philo->dead && !philo->sim_end)
-	{
-		sem_wait(philo->table->death);
-		printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n", timestamp(philo->start_time), philo->id);
-		philo->sim_end = false;
-		if (philo->table->num_philos % 2 == 0)
-			philo->dead = true;
-		sem_post(philo->sem);
-		sem_post(philo->table->print);
-		return (NULL);
-	}
+		return (post_dead_philo(philo));
 	philo->dead = true;
 	philo->sim_end = true;
 	sem_post(philo->sem);

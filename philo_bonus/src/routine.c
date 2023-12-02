@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/01 15:13:36 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:37:56 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	philo_first_action(t_philo *philo)
 {
 	if (!philo || !philo->sem)
 		return ;
-	// print_message(philo, "is THINKING");
 	if (philo->id % 2 != 0)
 	{
 		print_message(philo, "is sleeping");
@@ -54,8 +53,6 @@ void	philo_first_action(t_philo *philo)
 			return ;
 		p_sleep(philo->table->time_to_sleep);
 	}
-	// print_message(philo, "is THINKING");
-	// p_sleep(1);
 }
 
 void	*philo_routine(t_philo *philo)

@@ -6,22 +6,15 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:09:22 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/01 16:21:38 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:33:08 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 #include <semaphore.h>
 
-// @todo cleanup on failure?
 static int	open_semaphores(t_table *table)
 {
-	sem_unlink("/forks");
-	sem_unlink("/death");
-	sem_unlink("/print");
-	sem_unlink("/sim_end");
-	sem_unlink("/sync_start");
-	sem_unlink("/time_since_meal");
 	table->forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
 	if (table->forks == SEM_FAILED)
 		return (EXIT_FAILURE);
@@ -47,22 +40,11 @@ static int	open_semaphores(t_table *table)
 static void	assign_philos(t_table *table, t_philo *new)
 {
 	if (new->id > 1 && new->id < table->num_philos)
-	{
-		// new->left = &table->philo_list[new->id - 2]->right;
 		table->philo_list[new->id - 2]->next = new;
-	}
 	else if (new->id > 1 && new->id == table->num_philos)
-	{
-		// table->philo_list[0]->left = &new->right;
 		new->next = table->philo_list[0];
-		// new->left = &table->philo_list[new->id - 2]->right;
-	}
 	else if (new->id == 1 && new->id == table->num_philos)
-	{
 		new->next = new;
-		// new->left = &new->right;
-	}
-	// pthread_mutex_init(&new->right, NULL);
 }
 
 char	*get_sem_name(int id)
