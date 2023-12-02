@@ -6,12 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:04:53 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 10:08:31 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:19:30 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <unistd.h>
 
 time_t	get_time_ms(void)
 {

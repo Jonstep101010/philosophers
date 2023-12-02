@@ -6,14 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 17:37:56 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:21:30 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include "struct.h"
-#include <semaphore.h>
-#include <signal.h>
 
 static bool	check_death(t_philo *philo)
 {

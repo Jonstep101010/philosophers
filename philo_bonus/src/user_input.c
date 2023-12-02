@@ -6,13 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:59:59 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/22 16:35:51 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:20:08 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <limits.h>
-#include <stdbool.h>
 
 static bool	isprefix(char c)
 {

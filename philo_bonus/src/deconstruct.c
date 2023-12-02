@@ -6,13 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:44:03 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/01 14:26:21 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:22:21 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <semaphore.h>
-#include <stdlib.h>
 
 void	free_item(void *tofree)
 {
@@ -24,9 +22,9 @@ void	deconstruct(t_table *rules)
 {
 	int	i;
 
-	i = -1;
-	if (!rules)
+	if (!rules || !rules->philo_list)
 		return ;
+	i = -1;
 	while (++i < rules->num_philos)
 	{
 		sem_close(rules->philo_list[i]->sem);

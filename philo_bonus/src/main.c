@@ -6,12 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:10:16 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 17:32:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:21:56 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <semaphore.h>
 
 /*
 memset, printf, malloc, free, write, fork, kill,

@@ -6,14 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:00:20 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 17:45:28 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:20:18 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <semaphore.h>
-#include <unistd.h>
-#include <limits.h>
 
 static void	philo_starving(t_philo *philo)
 {

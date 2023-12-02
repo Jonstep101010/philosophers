@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printing.c                                         :+:      :+:    :+:   */
+/*   external.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 07:12:35 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 18:09:27 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/12/02 18:03:59 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/12/02 18:21:04 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_bonus.h"
+#ifndef EXTERNAL_H
+# define EXTERNAL_H
 
-void	print_message(t_philo *philo, char *msg)
-{
-	sem_wait(philo->table->print);
-	sem_wait(philo->sem);
-	if (!philo->dead)
-		printf("%lu\t%d %s\n", timestamp(philo->start_time), philo->id, msg);
-	sem_post(philo->sem);
-	sem_post(philo->table->print);
-}
+# include <stddef.h>
+# include <stdbool.h>
+
+# include <semaphore.h>
+# include <fcntl.h>
+
+# include <sys/time.h>
+# include <time.h>
+
+# include <sys/wait.h>
+# include <signal.h>
+
+/* monitoring philos */
+# include <pthread.h>
+
+/* processes */
+# include <unistd.h>
+# include <sys/types.h>
+
+# include <stdlib.h>
+# include <stdio.h>
+
+# include <limits.h>
+#endif
