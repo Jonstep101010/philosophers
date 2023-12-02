@@ -72,6 +72,7 @@ void	*monitor_philo(void *arg)
 	return (NULL);
 }
 
+#include <limits.h>
 void	*cleanup_philo(void *arg)
 {
 	t_philo	*philo;
@@ -81,13 +82,28 @@ void	*cleanup_philo(void *arg)
 		return (NULL);
 	sem_wait(philo->table->sim_end);
 	sem_wait(philo->sem);
-	if (timestamp(philo->start_time) - philo->time_since_meal > philo->table->time_to_die && philo->dead)
+	if (philo->table->meals_to_eat != INT_MIN && philo->meal_count >= philo->table->meals_to_eat && !philo->sim_end && !philo->dead)
+	{
+		printf("cleanup of optional arg: %d\n", philo->id);
+		philo->sim_end = true;
+		philo->dead = true;
+		sem_post(philo->sem);
+		sem_post(philo->table->print);
+		return (NULL);
+	}
+	if (timestamp(philo->start_time) - philo->time_since_meal > philo->table->time_to_die && philo->dead && !philo->sim_end)
 	{
 		sem_wait(philo->table->death);
 		printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n", timestamp(philo->start_time), philo->id);
 		philo->sim_end = false;
-		philo->dead = false;
+		if (philo->table->num_philos % 2 == 0)
+			philo->dead = true;
+		//@audit should be possible to remove this
+		// if (philo->table->meals_to_eat != INT_MIN && philo->table->num_philos % 2 != 0)
+			// philo->dead = true;
 		sem_post(philo->sem);
+		// @audit not sure about this ...
+		// sem_post(philo->table->print);
 		sem_post(philo->table->print);
 		return (NULL);
 	}

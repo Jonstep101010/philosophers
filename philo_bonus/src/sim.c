@@ -22,6 +22,8 @@ static void	*main_monitor(void *arg)
 	t_table	*table;
 
 	table = (t_table *)arg;
+	if (table->meals_to_eat == INT_MIN)
+		return (NULL);
 	meals_eaten = 0;
 	sem_wait(table->sync_start);
 	sem_post(table->sync_start);
@@ -63,11 +65,12 @@ void	simulation(t_table *table)
 			forked_philo(table->philo_list[i], table);
 		}
 	}
-	sem_post(table->sync_start);
-	sem_post(table->print);
-
+	// @follow-up only for testing
+	table->philo_list[0]->start_time = get_time_ms();
 	if (pthread_create(&monitor_meals, NULL, main_monitor, table) != 0)
 		printf("Error creating main monitor thread\n");
+	sem_post(table->sync_start);
+	sem_post(table->print);
 	// need to add checking for meal_count @follow-up
 	p_sleep(table->time_to_die);
 	sem_wait(table->death);
