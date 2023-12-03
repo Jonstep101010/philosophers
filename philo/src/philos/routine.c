@@ -6,11 +6,21 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:59:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:24:47 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:54:33 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static bool	philo_is_dead(t_philo *philo)
+{
+	bool	dead;
+
+	pthread_mutex_lock(&philo->table->death);
+	dead = philo->table->dead;
+	pthread_mutex_unlock(&philo->table->death);
+	return (dead);
+}
 
 void	*philo_routine(void *arg)
 {
@@ -23,10 +33,12 @@ void	*philo_routine(void *arg)
 		sleeping(philo);
 	while (1)
 	{
-		if (!eating(philo))
+		if (philo_is_dead(philo) || !eating(philo))
 			break ;
-		sleeping(philo);
-		thinking(philo);
+		if (!philo_is_dead(philo))
+			sleeping(philo);
+		if (!philo_is_dead(philo))
+			thinking(philo);
 	}
 	return (NULL);
 }

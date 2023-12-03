@@ -3,9 +3,33 @@
 #include "unity.h"
 
 #include "struct.h"
-#include "printing.h"
 #include <unistd.h>
+# include <stddef.h>
+# include <sys/time.h>
+# include <stdio.h>
 
+time_t	mock_get_time_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+unsigned long	mock_timestamp(t_table *table)
+{
+	return ((mock_get_time_ms() - table->start_time));
+}
+
+void	mock_print_message(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&philo->table->printing);
+	pthread_mutex_lock(&philo->table->death);
+	if (!philo->table->dead)
+		printf("%lu %d %s\n", mock_timestamp(philo->table), philo->id, msg);
+	pthread_mutex_unlock(&philo->table->death);
+	pthread_mutex_unlock(&philo->table->printing);
+}
 
 void setUp(void)
 {

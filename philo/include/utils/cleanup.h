@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 08:32:18 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:32:27 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:58:20 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,4 @@
 # include <stdlib.h>
 
 void	deconstruct(t_table *rules);
-int		wrong_input(void);
 #endif // CLEANUP_H

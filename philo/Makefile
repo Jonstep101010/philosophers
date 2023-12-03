@@ -14,12 +14,12 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/ src/sim src/utils src/philos
+VPATH		:= src/ src/philos src/sim src/utils
 
 SRC			:= main.c
+SRC_PHILO	:= routine.c philo_utils.c
 SRC_SIM		:= setup.c sim.c
 SRC_UTILS	:= ft_calloc.c checks.c cleanup.c utils_time.c user_input.c ft_atol.c
-SRC_PHILO	:= printing.c routine.c philo_actions.c
 
 SRCS		:= $(SRC) $(SRC_SIM) $(SRC_UTILS) $(SRC_PHILO)
 

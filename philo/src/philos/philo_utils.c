@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_actions.c                                    :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 20:08:14 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:00:49 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,8 @@ static bool	select_forks(t_philo *philo)
 	return (true);
 }
 
-static bool	philo_is_dead(t_philo *philo)
-{
-	bool	dead;
-
-	pthread_mutex_lock(&philo->table->death);
-	dead = philo->table->dead;
-	pthread_mutex_unlock(&philo->table->death);
-	return (dead);
-}
-
 bool	eating(t_philo *philo)
 {
-	if (philo_is_dead(philo))
-		return (false);
 	if (philo)
 	{
 		if (!select_forks(philo))
@@ -73,17 +61,23 @@ bool	eating(t_philo *philo)
 	return (true);
 }
 
-void	thinking(t_philo *philo)
+void	print_message(t_philo *philo, char *msg)
 {
-	if (philo && !philo_is_dead(philo))
-		print_message(philo, "is thinking");
+	pthread_mutex_lock(&philo->table->printing);
+	pthread_mutex_lock(&philo->table->death);
+	if (!philo->table->dead)
+		printf("%lu %d %s\n", timestamp(philo->start_time), philo->id, msg);
+	pthread_mutex_unlock(&philo->table->death);
+	pthread_mutex_unlock(&philo->table->printing);
 }
 
 void	sleeping(t_philo *philo)
 {
-	if (philo && !philo_is_dead(philo))
-	{
-		print_message(philo, "is sleeping");
-		p_sleep(philo->table->time_to_sleep);
-	}
+	print_message(philo, "is sleeping");
+	p_sleep(philo->table->time_to_sleep);
+}
+
+void	thinking(t_philo *philo)
+{
+	print_message(philo, "is thinking");
 }
