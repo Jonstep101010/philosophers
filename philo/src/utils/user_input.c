@@ -6,12 +6,19 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/03 17:13:26 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:26:51 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "user_input.h"
 #include <limits.h>
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 static bool	is_valid_nbr(int ac, char **av)
 {

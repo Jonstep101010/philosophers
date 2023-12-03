@@ -19,7 +19,7 @@ VPATH		:= src/ src/philos src/sim src/utils
 SRC			:= main.c
 SRC_PHILO	:= routine.c philo_utils.c
 SRC_SIM		:= setup.c sim.c
-SRC_UTILS	:= ft_calloc.c checks.c deconstruct.c utils_time.c user_input.c ft_atol.c
+SRC_UTILS	:= ft_calloc.c deconstruct.c utils_time.c user_input.c ft_atol.c
 
 SRCS		:= $(SRC) $(SRC_PHILO) $(SRC_SIM) $(SRC_UTILS)
 
