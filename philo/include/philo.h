@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/03 17:25:54 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:22:25 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "utils/user_input.h"
 # include "sim/setup.h"
 # include "utils/utils.h"
-# include "utils/cleanup.h"
 # include "utils/checks.h"
 # include "utils/utils_time.h"
 # include "philos/printing.h"
