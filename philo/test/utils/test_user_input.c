@@ -2,7 +2,6 @@
 
 #include "user_input.h"
 #include "../../src/utils/ft_atol.c"
-#include "../../src/utils/checks.c"
 #include "../../src/utils/ft_calloc.c"
 #include "../../src/utils/utils_time.c"
 
@@ -14,6 +13,16 @@ void setUp(void)
 
 void tearDown(void)
 {
+}
+
+void test_isdigit()
+{
+	for (int i = 0; i <= 9; i++) {
+		TEST_ASSERT_EQUAL(true, ft_isdigit(i + '0'));
+	}
+	for (int i = 10; i <= 127; i++) {
+		TEST_ASSERT_EQUAL(false, ft_isdigit(i + '0'));
+	}
 }
 
 void test_parse_input_returns_1_invalid_input(){
