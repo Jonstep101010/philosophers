@@ -1,7 +1,7 @@
 #ifdef TEST
 
-#include "parse_input.h"
-#include "../../src/io/ft_atol.c"
+#include "user_input.h"
+#include "../../src/utils/ft_atol.c"
 #include "../../src/utils/checks.c"
 #include "../../src/utils/ft_calloc.c"
 #include "../../src/utils/utils_time.c"

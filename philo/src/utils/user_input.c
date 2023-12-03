@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
+/*   user_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 10:04:15 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:13:26 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_input.h"
+#include "user_input.h"
 #include <limits.h>
 
 static bool	is_valid_nbr(int ac, char **av)

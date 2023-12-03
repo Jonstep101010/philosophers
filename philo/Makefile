@@ -4,10 +4,9 @@ NAME		  := philo
 # --------------------------------- includes --------------------------------- #
 
 INCS		= ./include \
-				./include/io \
-				./include/setup \
+				./include/sim \
 				./include/utils \
-				./include/philosim
+				./include/philos
 
 BUILD_DIR	:= .build
 
@@ -15,15 +14,14 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/ src/io src/setup src/utils src/philosim
+VPATH		:= src/ src/sim src/utils src/philos
 
 SRC			:= main.c
-SRC_IO		:= parse_input.c ft_atol.c
-SRC_SETUP	:= set_table.c
-SRC_UTILS	:= ft_calloc.c checks.c cleanup.c utils_time.c
-SRC_SIM		:= sim.c printing.c routine.c philo_actions.c
+SRC_SIM		:= setup.c sim.c
+SRC_UTILS	:= ft_calloc.c checks.c cleanup.c utils_time.c user_input.c ft_atol.c
+SRC_PHILO	:= printing.c routine.c philo_actions.c
 
-SRCS		:= $(SRC) $(SRC_IO) $(SRC_SETUP) $(SRC_UTILS) $(SRC_SIM)
+SRCS		:= $(SRC) $(SRC_SIM) $(SRC_UTILS) $(SRC_PHILO)
 
 # ---------------------------------------------------------------------------- #
 #                             compilation arguments                            #
@@ -79,12 +77,6 @@ re:
 	$(MAKE) all
 
 # ----------------------------- additional rules ----------------------------- #
-# git submodule update --init --recursive
-
-update: fclean
-	git stash
-	git pull
-	git stash pop
 
 run: all
 	./$(NAME) 4 300 200 200 
@@ -98,9 +90,6 @@ memcheck: all
 
 debug: all#--log-file=valgrind.log  
 	valgrind --tool=helgrind ./$(NAME) 3 80000 200 200
-
-# test:
-# 	cd ./../tests-pipex && sh ./test.sh
 
 .PHONY: run update re
 # .SILENT:

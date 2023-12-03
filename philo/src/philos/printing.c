@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 07:12:35 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/25 15:49:04 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:29:00 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void	mock_print_message(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->table->printing);
 }
 #endif
-
-// use timestamp, philo id, msg, color?
-// @follow-up need to implement color
 #ifndef TEST
 
 void	print_message(t_philo *philo, char *msg)

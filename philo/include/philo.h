@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 08:06:13 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:25:54 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 # include <pthread.h>
 
 // files that represent mock headers for the source files to test
-# include "io/parse_input.h"
-# include "setup/set_table.h"
+# include "utils/user_input.h"
+# include "sim/setup.h"
 # include "utils/utils.h"
 # include "utils/cleanup.h"
 # include "utils/checks.h"
 # include "utils/utils_time.h"
-# include "philosim/printing.h"
+# include "philos/printing.h"
 
 # ifndef TEST
 // bool	philo_is_dead(t_philo *philo);
