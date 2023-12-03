@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:11:06 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/03 16:42:22 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 16:54:57 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void	*deconstruct(t_table *rules);
 void	*ft_calloc(size_t nitems, size_t size);
 char	*ft_itoa(int n);
 char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_isdigit(int c);
+long	ft_atol(const char *s);
 
 #endif

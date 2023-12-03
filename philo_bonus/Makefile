@@ -14,9 +14,10 @@ BUILD_DIR	:= .build
 VPATH		:= src/ src/utils src/philos src/sim
 SRC			:= main.c 
 
-SRC_UTILS	:= user_input.c utils_mem.c utils_time.c utils_to.c deconstruct.c
-SRC_PHILO	:= forked_process.c threads.c routine.c philo_actions.c
-SRC_SIM		:= sim.c setup.c printing.c
+SRC_UTILS	:= user_input.c ft_calloc.c utils_time.c deconstruct.c \
+				ft_atol.c ft_itoa.c ft_strjoin.c
+SRC_PHILO	:= forked_process.c threads.c routine.c philo_utils.c
+SRC_SIM		:= sim.c setup.c
 SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_PHILO) $(SRC_SIM)
 
 # ---------------------------------------------------------------------------- #

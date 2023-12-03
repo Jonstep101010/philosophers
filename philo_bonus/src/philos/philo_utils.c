@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_actions.c                                    :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:38:31 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 18:21:44 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 17:04:16 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,14 @@ void	eating(t_philo *philo)
 	sem_post(philo->sem);
 	p_sleep(philo->table->time_to_eat);
 	sem_post(philo->table->forks);
+}
+
+void	print_message(t_philo *philo, char *msg)
+{
+	sem_wait(philo->table->print);
+	sem_wait(philo->sem);
+	if (!philo->dead)
+		printf("%lu\t%d %s\n", timestamp(philo->start_time), philo->id, msg);
+	sem_post(philo->sem);
+	sem_post(philo->table->print);
 }

@@ -1,26 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_mem.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 10:04:12 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 10:07:52 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/12/03 16:57:11 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/12/03 16:57:35 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <string.h>
 
-void	*ft_calloc(size_t nitems, size_t size)
+static	int	get_digits(long n)
 {
-	void	*ptr;
+	int	digits;
 
-	if (nitems && (nitems * size) / nitems != size)
+	digits = 0;
+	if (n <= 0)
+		digits++;
+	while (n)
+	{
+		n /= 10;
+		digits++;
+	}
+	return (digits);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*s;
+	int		len;
+	long	nbr;
+
+	nbr = n;
+	len = get_digits(nbr);
+	s = (char *) ft_calloc(len + 1, sizeof(char));
+	if (!s)
 		return (0);
-	ptr = malloc(nitems * size);
-	if (!ptr)
-		return (0);
-	return ((memset(ptr, 0, nitems * size)));
+	if (nbr < 0)
+	{
+		s[0] = '-';
+		nbr *= -1;
+	}
+	while (len)
+	{
+		s[--len] = nbr % 10 + '0';
+		nbr /= 10;
+	}
+	return (s);
 }

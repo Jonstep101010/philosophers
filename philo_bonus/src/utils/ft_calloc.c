@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printing.c                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 07:12:35 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 18:09:27 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/11/16 10:04:12 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/11/16 10:07:52 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+#include <string.h>
 
-void	print_message(t_philo *philo, char *msg)
+void	*ft_calloc(size_t nitems, size_t size)
 {
-	sem_wait(philo->table->print);
-	sem_wait(philo->sem);
-	if (!philo->dead)
-		printf("%lu\t%d %s\n", timestamp(philo->start_time), philo->id, msg);
-	sem_post(philo->sem);
-	sem_post(philo->table->print);
+	void	*ptr;
+
+	if (nitems && (nitems * size) / nitems != size)
+		return (0);
+	ptr = malloc(nitems * size);
+	if (!ptr)
+		return (0);
+	return ((memset(ptr, 0, nitems * size)));
 }
