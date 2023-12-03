@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   deconstruct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:42:19 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/03 17:58:12 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:19:39 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST
 # include "philo.h"
-#endif
-#ifdef TEST
-# include "cleanup.h"
-# include <stdio.h>
-#endif
 
-void	free_item(void *tofree)
+static void	free_item(void *tofree)
 {
 	free(tofree);
 	tofree = NULL;
 }
 
-void	free_philo(t_philo *philo)
+static void	free_philo(t_philo *philo)
 {
 	pthread_mutex_destroy(&(philo->right));
 	free_item(philo);
