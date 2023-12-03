@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:11:06 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/02 18:14:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/03 16:42:22 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ time_t	timestamp(time_t start_time);
 int		validate_and_init(t_table **input, int ac, char **av);
 void	*setup(t_table *table);
 void	free_item(void *tofree);
-void	deconstruct(t_table *rules);
+void	*deconstruct(t_table *rules);
 
 /*helpers*/
 void	*ft_calloc(size_t nitems, size_t size);

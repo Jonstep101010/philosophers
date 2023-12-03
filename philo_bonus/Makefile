@@ -11,13 +11,13 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/
+VPATH		:= src/ src/utils src/philos src/sim
+SRC			:= main.c 
 
-SRC			:= main.c user_input.c utils_mem.c utils_time.c setup.c \
-				philo_actions.c printing.c routine.c deconstruct.c \
-				sim.c utils_to.c forked_process.c threads.c
-
-SRCS		:= $(SRC)
+SRC_UTILS	:= user_input.c utils_mem.c utils_time.c utils_to.c deconstruct.c
+SRC_PHILO	:= forked_process.c threads.c routine.c philo_actions.c
+SRC_SIM		:= sim.c setup.c printing.c
+SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_PHILO) $(SRC_SIM)
 
 # ---------------------------------------------------------------------------- #
 #                             compilation arguments                            #
@@ -79,11 +79,11 @@ re:
 run: all
 	./$(NAME) 4 300 200 200 
 
-memcheck: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 5 800 200 200
+memcheck: all# 
+	valgrind --tool=memcheck --leak-check=full ./$(NAME) 4 300 200 200
 
 debug: all#--log-file=valgrind.log   
-	valgrind --tool=drd --trace-children=yes --trace-semaphore=yes -s --log-file=valgrind.log ./$(NAME) 5 800 200 200
+	valgrind --tool=drd --trace-children=yes --trace-semaphore=yes -s --log-file=valgrind.log ./$(NAME) 5 500 200 200
 
 .PHONY: run update re
 # .SILENT:
