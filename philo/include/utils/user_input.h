@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reqs.h                                             :+:      :+:    :+:   */
+/*   parse_input.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 09:10:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 09:13:27 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/10/25 13:48:42 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/11/10 09:10:38 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-• All the forks are put in the middle of the table.
-• They have no states in memory but the number of available forks is represented by a semaphore.
-• Each philosopher should be a process. But the main process should not be a
-philosopher
-*/
+#ifndef PARSE_INPUT_H
+# define PARSE_INPUT_H
+# include "struct.h"
+# include "philo.h"
+
+int		validate_and_init(t_table **input, int ac, char **av);
+long	ft_atol(const char *s);
+#endif // PARSE_INPUT_H

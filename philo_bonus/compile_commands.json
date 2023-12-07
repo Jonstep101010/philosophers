@@ -29,10 +29,10 @@
       "-c",
       "-o",
       ".build/user_input.o",
-      "src/utils/user_input.c"
+      "src/user_input.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/utils/user_input.c",
+    "file": "/workspace/philosophers/philo_bonus/src/user_input.c",
     "output": "/workspace/philosophers/philo_bonus/.build/user_input.o"
   },
   {
@@ -46,12 +46,12 @@
       "-I./include",
       "-c",
       "-o",
-      ".build/ft_calloc.o",
-      "src/utils/ft_calloc.c"
+      ".build/utils_mem.o",
+      "src/utils_mem.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/utils/ft_calloc.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/ft_calloc.o"
+    "file": "/workspace/philosophers/philo_bonus/src/utils_mem.c",
+    "output": "/workspace/philosophers/philo_bonus/.build/utils_mem.o"
   },
   {
     "arguments": [
@@ -65,10 +65,10 @@
       "-c",
       "-o",
       ".build/utils_time.o",
-      "src/utils/utils_time.c"
+      "src/utils_time.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/utils/utils_time.c",
+    "file": "/workspace/philosophers/philo_bonus/src/utils_time.c",
     "output": "/workspace/philosophers/philo_bonus/.build/utils_time.o"
   },
   {
@@ -82,12 +82,12 @@
       "-I./include",
       "-c",
       "-o",
-      ".build/deconstruct.o",
-      "src/utils/deconstruct.c"
+      ".build/setup.o",
+      "src/setup.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/utils/deconstruct.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/deconstruct.o"
+    "file": "/workspace/philosophers/philo_bonus/src/setup.c",
+    "output": "/workspace/philosophers/philo_bonus/.build/setup.o"
   },
   {
     "arguments": [
@@ -100,12 +100,12 @@
       "-I./include",
       "-c",
       "-o",
-      ".build/ft_atol.o",
-      "src/utils/ft_atol.c"
+      ".build/philo_actions.o",
+      "src/philo_actions.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/utils/ft_atol.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/ft_atol.o"
+    "file": "/workspace/philosophers/philo_bonus/src/philo_actions.c",
+    "output": "/workspace/philosophers/philo_bonus/.build/philo_actions.o"
   },
   {
     "arguments": [
@@ -118,66 +118,12 @@
       "-I./include",
       "-c",
       "-o",
-      ".build/ft_itoa.o",
-      "src/utils/ft_itoa.c"
+      ".build/printing.o",
+      "src/printing.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/utils/ft_itoa.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/ft_itoa.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang",
-      "-g3",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-pthread",
-      "-I./include",
-      "-c",
-      "-o",
-      ".build/ft_strjoin.o",
-      "src/utils/ft_strjoin.c"
-    ],
-    "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/utils/ft_strjoin.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/ft_strjoin.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang",
-      "-g3",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-pthread",
-      "-I./include",
-      "-c",
-      "-o",
-      ".build/forked_process.o",
-      "src/philos/forked_process.c"
-    ],
-    "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/philos/forked_process.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/forked_process.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang",
-      "-g3",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-pthread",
-      "-I./include",
-      "-c",
-      "-o",
-      ".build/threads.o",
-      "src/philos/threads.c"
-    ],
-    "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/philos/threads.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/threads.o"
+    "file": "/workspace/philosophers/philo_bonus/src/printing.c",
+    "output": "/workspace/philosophers/philo_bonus/.build/printing.o"
   },
   {
     "arguments": [
@@ -191,10 +137,10 @@
       "-c",
       "-o",
       ".build/routine.o",
-      "src/philos/routine.c"
+      "src/routine.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/philos/routine.c",
+    "file": "/workspace/philosophers/philo_bonus/src/routine.c",
     "output": "/workspace/philosophers/philo_bonus/.build/routine.o"
   },
   {
@@ -208,12 +154,12 @@
       "-I./include",
       "-c",
       "-o",
-      ".build/philo_utils.o",
-      "src/philos/philo_utils.c"
+      ".build/deconstruct.o",
+      "src/deconstruct.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/philos/philo_utils.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/philo_utils.o"
+    "file": "/workspace/philosophers/philo_bonus/src/deconstruct.c",
+    "output": "/workspace/philosophers/philo_bonus/.build/deconstruct.o"
   },
   {
     "arguments": [
@@ -227,10 +173,10 @@
       "-c",
       "-o",
       ".build/sim.o",
-      "src/sim/sim.c"
+      "src/sim.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/sim/sim.c",
+    "file": "/workspace/philosophers/philo_bonus/src/sim.c",
     "output": "/workspace/philosophers/philo_bonus/.build/sim.o"
   },
   {
@@ -244,11 +190,29 @@
       "-I./include",
       "-c",
       "-o",
-      ".build/setup.o",
-      "src/sim/setup.c"
+      ".build/utils_to.o",
+      "src/utils_to.c"
     ],
     "directory": "/workspace/philosophers/philo_bonus",
-    "file": "/workspace/philosophers/philo_bonus/src/sim/setup.c",
-    "output": "/workspace/philosophers/philo_bonus/.build/setup.o"
+    "file": "/workspace/philosophers/philo_bonus/src/utils_to.c",
+    "output": "/workspace/philosophers/philo_bonus/.build/utils_to.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-g3",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pthread",
+      "-I./include",
+      "-c",
+      "-o",
+      ".build/forked_process.o",
+      "src/forked_process.c"
+    ],
+    "directory": "/workspace/philosophers/philo_bonus",
+    "file": "/workspace/philosophers/philo_bonus/src/forked_process.c",
+    "output": "/workspace/philosophers/philo_bonus/.build/forked_process.o"
   }
 ]

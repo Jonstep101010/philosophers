@@ -64,5 +64,3 @@ philo_bonus/.build_test
 philo_bonus/.build
 philo_bonus/philo_bonus
 .cache/
-philo-rust/
-philo/test

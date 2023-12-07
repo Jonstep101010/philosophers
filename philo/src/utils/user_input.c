@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "user_input.h"
 #include <limits.h>
 
 int	ft_isdigit(int c)

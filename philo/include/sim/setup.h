@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reqs.h                                             :+:      :+:    :+:   */
+/*   set_table.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 09:10:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 09:13:27 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/10/27 15:49:45 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/11/15 08:15:36 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-• All the forks are put in the middle of the table.
-• They have no states in memory but the number of available forks is represented by a semaphore.
-• Each philosopher should be a process. But the main process should not be a
-philosopher
-*/
+#ifndef SET_PHILOS_H
+# define SET_PHILOS_H
+
+# include "struct.h"
+
+// t_philo	*set_philos(t_table *table);
+t_philo	*create_philo(t_table *table, int id);
+void	*setup(t_table *table);
+#endif // SET_PHILOS_H
