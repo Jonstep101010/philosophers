@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "philo.h"
 
 /**
  * @brief wrap malloc call & initialize

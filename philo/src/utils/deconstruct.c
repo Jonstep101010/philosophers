@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 static void	free_item(void *tofree)
 {

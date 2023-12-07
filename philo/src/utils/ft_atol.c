@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "user_input.h"
+#include "philo.h"
 #include <limits.h>
 
 static bool	isprefix(char c)

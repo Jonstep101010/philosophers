@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+
 static bool	philo_starving(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->death);
@@ -22,7 +23,8 @@ static bool	philo_starving(t_philo *philo)
 	if (timestamp(philo->start_time)
 		- philo->time_since_meal > philo->table->time_to_die)
 	{
-		printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n", timestamp(philo->start_time), philo->id);
+		printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n",
+			timestamp(philo->start_time), philo->id);
 		philo->table->dead = true;
 		pthread_mutex_unlock(&philo->table->death);
 		return (true);

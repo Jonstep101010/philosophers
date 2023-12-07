@@ -12,7 +12,8 @@
 
 /*
 • All the forks are put in the middle of the table.
-• They have no states in memory but the number of available forks is represented by a semaphore.
+• They have no states in memory but the number of available forks is
+	represented by a semaphore.
 • Each philosopher should be a process. But the main process should not be a
 philosopher
 */

@@ -71,16 +71,6 @@ void	print_message(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->table->printing);
 }
 
-static bool	philo_is_dead(t_philo *philo)
-{
-	bool	dead;
-
-	pthread_mutex_lock(&philo->table->death);
-	dead = philo->table->dead;
-	pthread_mutex_unlock(&philo->table->death);
-	return (dead);
-}
-
 void	sleeping(t_philo *philo)
 {
 	if (philo_is_dead(philo))

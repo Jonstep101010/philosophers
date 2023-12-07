@@ -15,7 +15,8 @@
 
 static int	open_semaphores(t_table *table)
 {
-	table->forks = sem_open("/forks", O_CREAT | O_EXCL, 0666, table->num_philos / 2);
+	table->forks = sem_open("/forks", O_CREAT | O_EXCL,
+			0666, table->num_philos / 2);
 	if (table->forks == SEM_FAILED)
 		return (EXIT_FAILURE);
 	table->death = sem_open("/death", O_CREAT | O_EXCL, 0666, 0);

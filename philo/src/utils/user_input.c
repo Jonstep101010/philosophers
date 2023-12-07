@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "user_input.h"
+#include "philo.h"
 #include <limits.h>
 
 int	ft_isdigit(int c)
@@ -46,7 +46,6 @@ static bool	is_valid_nbr(int ac, char **av)
 	return (true);
 }
 
-// @warning does not use actual time
 static t_table	*init_ruletable(int ac, char **av)
 {
 	t_table	*table;

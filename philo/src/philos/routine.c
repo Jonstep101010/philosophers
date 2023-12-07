@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-static bool	philo_is_dead(t_philo *philo)
+bool	philo_is_dead(t_philo *philo)
 {
 	bool	dead;
 
