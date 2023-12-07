@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:04:05 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/03 18:25:32 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/07 09:04:20 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@
 # include "utils/utils_time.h"
 
 # ifndef TEST
-// bool	philo_is_dead(t_philo *philo);
-void	*philo_routine(void *arg);
+void	*philosopher(void *arg);
 void	*setup(t_table *table);
 void	simulation(t_table *rules);
 

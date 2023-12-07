@@ -22,8 +22,16 @@ pthread_mutex_unlock
 */
 static int	wrong_input(void)
 {
-	printf("Some kind of Error message\n");
+	printf("shit input\n");
 	return (EXIT_FAILURE);
+}
+
+static void	deconstruct_main(t_table *table)
+{
+	pthread_mutex_destroy(&table->death);
+	pthread_mutex_destroy(&table->printing);
+	free(table);
+	table = NULL;
 }
 
 #ifndef TEST
@@ -33,7 +41,7 @@ int	main(int ac, char **av)
 	t_table	*table;
 
 	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
-		return (wrong_input());
+		return (deconstruct_main(table), wrong_input());
 	setup(table);
 	simulation(table);
 	deconstruct(table);

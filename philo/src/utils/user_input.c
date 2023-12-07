@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 14:52:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/03 18:26:51 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:20:25 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static t_table	*init_ruletable(int ac, char **av)
 	pthread_mutex_init(&(table->death), NULL);
 	if (ac == 6 && ft_atol(av[5]) >= 0 && table->num_philos > 1)
 		table->meals_to_eat = ft_atol(av[5]);
-	// if (ac == 6 && table->num_philos < 2)
-	// 	return (NULL);
 	return (table);
 }
 
@@ -77,6 +75,8 @@ int	validate_and_init(t_table **input, int ac, char **av)
 		return (EXIT_FAILURE);
 	*input = init_ruletable(ac, av);
 	if (!*input)
+		return (EXIT_FAILURE);
+	if ((*input)->num_philos > 200)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

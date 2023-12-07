@@ -6,12 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:46:29 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/20 08:46:01 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/07 09:25:27 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 static bool	philo_starving(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->death);
@@ -23,9 +22,7 @@ static bool	philo_starving(t_philo *philo)
 	if (timestamp(philo->start_time)
 		- philo->time_since_meal > philo->table->time_to_die)
 	{
-		pthread_mutex_unlock(&philo->table->death);
-		print_message(philo, "died");
-		pthread_mutex_lock(&philo->table->death);
+		printf("\033[1;31m\033[1m%lu\t%d died\033[0m\n", timestamp(philo->start_time), philo->id);
 		philo->table->dead = true;
 		pthread_mutex_unlock(&philo->table->death);
 		return (true);
@@ -66,18 +63,18 @@ void	simulation(t_table *table)
 	list = table->philo_list;
 	philo = list[0];
 	i = -1;
+	pthread_mutex_lock(&table->death);
 	while (++i < table->num_philos)
-		pthread_create(&list[i]->thread_id, NULL, philo_routine, list[i]);
-	i = 0;
+		if (pthread_create(&list[i]->thread_id, 0, philosopher, list[i]) == -1)
+			return ;
+	table->start_time = get_time_ms();
+	pthread_mutex_unlock(&table->death);
 	while (1)
 	{
-		// pthread_mutex_lock(&philo->mutex);
 		if (philo_starving(philo) || philos_have_eaten(philo, &i))
 		{
-			// pthread_mutex_unlock(&philo->mutex);
 			break ;
 		}
-		// pthread_mutex_unlock(&philo->mutex);
 		philo = philo->next;
 	}
 	i = -1;
