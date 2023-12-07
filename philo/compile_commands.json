@@ -8,10 +8,9 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
       ".build/main.o",
@@ -30,18 +29,17 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
-      ".build/parse_input.o",
-      "src/io/parse_input.c"
+      ".build/routine.o",
+      "src/philos/routine.c"
     ],
     "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/io/parse_input.c",
-    "output": "/workspace/philosophers/philo/.build/parse_input.o"
+    "file": "/workspace/philosophers/philo/src/philos/routine.c",
+    "output": "/workspace/philosophers/philo/.build/routine.o"
   },
   {
     "arguments": [
@@ -52,18 +50,17 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
-      ".build/ft_atol.o",
-      "src/io/ft_atol.c"
+      ".build/philo_utils.o",
+      "src/philos/philo_utils.c"
     ],
     "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/io/ft_atol.c",
-    "output": "/workspace/philosophers/philo/.build/ft_atol.o"
+    "file": "/workspace/philosophers/philo/src/philos/philo_utils.c",
+    "output": "/workspace/philosophers/philo/.build/philo_utils.o"
   },
   {
     "arguments": [
@@ -74,18 +71,17 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
-      ".build/set_table.o",
-      "src/setup/set_table.c"
+      ".build/setup.o",
+      "src/sim/setup.c"
     ],
     "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/setup/set_table.c",
-    "output": "/workspace/philosophers/philo/.build/set_table.o"
+    "file": "/workspace/philosophers/philo/src/sim/setup.c",
+    "output": "/workspace/philosophers/philo/.build/setup.o"
   },
   {
     "arguments": [
@@ -96,10 +92,30 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
+      "-c",
+      "-o",
+      ".build/sim.o",
+      "src/sim/sim.c"
+    ],
+    "directory": "/workspace/philosophers/philo",
+    "file": "/workspace/philosophers/philo/src/sim/sim.c",
+    "output": "/workspace/philosophers/philo/.build/sim.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-g3",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pthread",
+      "-I./include",
+      "-I./include/sim",
+      "-I./include/utils",
+      "-I./include/philos",
       "-c",
       "-o",
       ".build/ft_calloc.o",
@@ -118,18 +134,17 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
-      ".build/checks.o",
-      "src/utils/checks.c"
+      ".build/deconstruct.o",
+      "src/utils/deconstruct.c"
     ],
     "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/utils/checks.c",
-    "output": "/workspace/philosophers/philo/.build/checks.o"
+    "file": "/workspace/philosophers/philo/src/utils/deconstruct.c",
+    "output": "/workspace/philosophers/philo/.build/deconstruct.o"
   },
   {
     "arguments": [
@@ -140,32 +155,9 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
-      "-c",
-      "-o",
-      ".build/cleanup.o",
-      "src/utils/cleanup.c"
-    ],
-    "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/utils/cleanup.c",
-    "output": "/workspace/philosophers/philo/.build/cleanup.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang",
-      "-g3",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-pthread",
-      "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
-      "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
       ".build/utils_time.o",
@@ -184,18 +176,17 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
-      ".build/sim.o",
-      "src/philosim/sim.c"
+      ".build/user_input.o",
+      "src/utils/user_input.c"
     ],
     "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/philosim/sim.c",
-    "output": "/workspace/philosophers/philo/.build/sim.o"
+    "file": "/workspace/philosophers/philo/src/utils/user_input.c",
+    "output": "/workspace/philosophers/philo/.build/user_input.o"
   },
   {
     "arguments": [
@@ -206,61 +197,16 @@
       "-Werror",
       "-pthread",
       "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
+      "-I./include/sim",
       "-I./include/utils",
-      "-I./include/philosim",
+      "-I./include/philos",
       "-c",
       "-o",
-      ".build/printing.o",
-      "src/philosim/printing.c"
+      ".build/ft_atol.o",
+      "src/utils/ft_atol.c"
     ],
     "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/philosim/printing.c",
-    "output": "/workspace/philosophers/philo/.build/printing.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang",
-      "-g3",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-pthread",
-      "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
-      "-I./include/utils",
-      "-I./include/philosim",
-      "-c",
-      "-o",
-      ".build/routine.o",
-      "src/philosim/routine.c"
-    ],
-    "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/philosim/routine.c",
-    "output": "/workspace/philosophers/philo/.build/routine.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/clang",
-      "-g3",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-pthread",
-      "-I./include",
-      "-I./include/io",
-      "-I./include/setup",
-      "-I./include/utils",
-      "-I./include/philosim",
-      "-c",
-      "-o",
-      ".build/philo_actions.o",
-      "src/philosim/philo_actions.c"
-    ],
-    "directory": "/workspace/philosophers/philo",
-    "file": "/workspace/philosophers/philo/src/philosim/philo_actions.c",
-    "output": "/workspace/philosophers/philo/.build/philo_actions.o"
+    "file": "/workspace/philosophers/philo/src/utils/ft_atol.c",
+    "output": "/workspace/philosophers/philo/.build/ft_atol.o"
   }
 ]
