@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:45:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/03 17:57:51 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/08 09:22:28 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ static int	wrong_input(void)
 	return (EXIT_FAILURE);
 }
 
-static void	deconstruct_main(t_table *table)
-{
-	pthread_mutex_destroy(&table->death);
-	pthread_mutex_destroy(&table->printing);
-	free(table);
-	table = NULL;
-}
-
 #ifndef TEST
 
 int	main(int ac, char **av)
@@ -41,7 +33,7 @@ int	main(int ac, char **av)
 	t_table	*table;
 
 	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
-		return (deconstruct_main(table), wrong_input());
+		return (wrong_input());
 	setup(table);
 	simulation(table);
 	deconstruct(table);

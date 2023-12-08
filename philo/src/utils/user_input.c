@@ -46,6 +46,27 @@ static bool	is_valid_nbr(int ac, char **av)
 	return (true);
 }
 
+static bool		check_values(int ac, char **av)
+{
+	int	tmp;
+	int	i;
+
+	i = 0;
+	while (i < ac && av[++i])
+	{
+		tmp = ft_atol(av[i]);
+		if (i == 1 && (tmp < 1 || tmp > 200))
+			return (false);
+		else if (i == 2 && tmp < 60)
+			return (false);
+		else if (i == 3 && tmp < 60)
+			return (false);
+		else if (i == 4 && tmp < 60)
+			return (false);
+	}
+	return (true);
+}
+
 static t_table	*init_ruletable(int ac, char **av)
 {
 	t_table	*table;
@@ -58,11 +79,12 @@ static t_table	*init_ruletable(int ac, char **av)
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
 	table->time_to_sleep = ft_atol(av[4]);
-	table->meals_to_eat = INT_MIN;
 	table->dead = false;
 	pthread_mutex_init(&(table->death), NULL);
 	if (ac == 6 && ft_atol(av[5]) >= 0 && table->num_philos > 1)
 		table->meals_to_eat = ft_atol(av[5]);
+	else
+		table->meals_to_eat = INT_MIN;
 	return (table);
 }
 
@@ -71,6 +93,8 @@ int	validate_and_init(t_table **input, int ac, char **av)
 	if (ac > 6 || ac < 5)
 		return (EXIT_FAILURE);
 	if (!is_valid_nbr(ac, av))
+		return (EXIT_FAILURE);
+	if (!check_values(ac, av))
 		return (EXIT_FAILURE);
 	*input = init_ruletable(ac, av);
 	if (!*input)
