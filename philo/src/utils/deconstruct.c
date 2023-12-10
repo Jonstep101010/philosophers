@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   deconstruct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 15:53:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/07 09:13:20 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/11/07 07:42:19 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/12/03 18:19:39 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/**
- * @brief wrap malloc call & initialize
- * @param nitems items to allocate
- * @param size sizeof items
- */
-void	*ft_calloc(size_t nitems, size_t size)
+static void	free_item(void *tofree)
 {
-	void	*ptr;
+	free(tofree);
+	tofree = NULL;
+}
 
-	if (nitems && (nitems * size) / nitems != size)
-		return (0);
-	ptr = malloc(nitems * size);
-	if (!ptr)
-		return (0);
-	return ((memset(ptr, 0, nitems * size)));
+static void	free_philo(t_philo *philo)
+{
+	pthread_mutex_destroy(&(philo->right));
+	free_item(philo);
+}
+
+void	deconstruct(t_table *rules)
+{
+	int	i;
+
+	i = -1;
+	while (++i < rules->num_philos)
+		free_philo(rules->philo_list[i]);
+	pthread_mutex_destroy(&rules->death);
+	pthread_mutex_destroy(&rules->printing);
+	free_item(rules->philo_list);
+	free_item(rules);
 }

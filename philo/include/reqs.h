@@ -49,8 +49,10 @@ philos next to each other cannot ever eat at the same time
 if time to die is less than sum of time_to_eat + time_to_sleep
 before philosopher sleeps, update last meal time
 
-- philos cannot check themselves for death (thread busy with action and cannot check death time)
-	-> one thread checks time - last_eat_time == time_to_die) - once req_meals have been reached, stop
+- philos cannot check themselves for death
+	(thread busy with action and cannot check death time)
+	-> one thread checks time - last_eat_time == time_to_die)
+	 - once req_meals have been reached, stop
 - some philos eat at same time (4 or more)
 
 - single philo will always die (cannot eat without 2 forks)

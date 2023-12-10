@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reqs.h                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 09:10:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 09:13:27 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/11/16 10:04:12 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/11/16 10:07:52 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-• All the forks are put in the middle of the table.
-• They have no states in memory but the number of available forks is
-	represented by a semaphore.
-• Each philosopher should be a process. But the main process should not be a
-philosopher
-*/
+#include "philo_bonus.h"
+#include <string.h>
+
+void	*ft_calloc(size_t nitems, size_t size)
+{
+	void	*ptr;
+
+	if (nitems && (nitems * size) / nitems != size)
+		return (0);
+	ptr = malloc(nitems * size);
+	if (!ptr)
+		return (0);
+	return ((memset(ptr, 0, nitems * size)));
+}

@@ -6,12 +6,11 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:10:16 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/25 17:14:15 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:21:56 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-#include <semaphore.h>
 
 /*
 memset, printf, malloc, free, write, fork, kill,
@@ -29,7 +28,8 @@ static int	wrong_input(void)
 
 static void	main_cleanup(t_table *table)
 {
-	deconstruct(table);
+	if (table)
+		deconstruct(table);
 	sem_unlink("/forks");
 	sem_unlink("/death");
 	sem_unlink("/print");
@@ -42,6 +42,7 @@ int	main(int ac, char **av)
 {
 	t_table	*table;
 
+	main_cleanup(NULL);
 	if (validate_and_init(&table, ac, av) == EXIT_FAILURE || !table)
 		return (wrong_input());
 	setup(table);

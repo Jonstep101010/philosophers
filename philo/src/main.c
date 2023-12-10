@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:45:08 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/15 07:57:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/08 09:22:28 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ pthread_detach, pthread_join, pthread_mutex_init,
 pthread_mutex_destroy, pthread_mutex_lock,
 pthread_mutex_unlock
 */
-// void	leaks_check()
-// {
-// 	system("leaks philo");
-// }
-// atexit(leaks_check);
+static int	wrong_input(void)
+{
+	printf("shit input\n");
+	return (EXIT_FAILURE);
+}
 
 #ifndef TEST
 

@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reqs.h                                             :+:      :+:    :+:   */
+/*   external.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 09:10:02 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/11/16 09:13:27 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/12/02 18:03:59 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/12/02 18:21:04 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-• All the forks are put in the middle of the table.
-• They have no states in memory but the number of available forks is
-	represented by a semaphore.
-• Each philosopher should be a process. But the main process should not be a
-philosopher
-*/
+#ifndef EXTERNAL_H
+# define EXTERNAL_H
+
+# include <stddef.h>
+# include <stdbool.h>
+
+# include <semaphore.h>
+# include <fcntl.h>
+
+# include <sys/time.h>
+# include <time.h>
+
+# include <sys/wait.h>
+# include <signal.h>
+
+/* monitoring philos */
+# include <pthread.h>
+
+/* processes */
+# include <unistd.h>
+# include <sys/types.h>
+
+# include <stdlib.h>
+# include <stdio.h>
+
+# include <limits.h>
+#endif
